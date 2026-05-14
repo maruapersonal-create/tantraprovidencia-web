@@ -106,7 +106,7 @@ export default function TantraProvidencia() {
 
             <div className="relative overflow-hidden rounded-[2.5rem] border border-red-800/40 shadow-[0_0_80px_rgba(255,0,60,0.2)]">
               <img
-                src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop"
+                src="/IMAGES/FN.jpeg"
                 alt="Sensual premium"
                 className="w-full h-[750px] object-cover"
               />

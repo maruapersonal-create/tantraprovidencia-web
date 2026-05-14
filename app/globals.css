@@ -24,3 +24,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  img {
+    height: auto !important;
+  }
+}

@@ -4,21 +4,21 @@ export default function TantraProvidencia() {
       name: 'DANIELA',
       age: '36 años',
       image:
-        '/IMAGES/DANIELA.1,jpeg',
+        '/IMAGES/DANIELA.1.jpeg',
       description: 'Masajes relajantes y experiencia sensual premium.',
     },
     {
       name: 'Fernanda',
       age: '28 años',
       image:
-        '/IMAGES/FERNANDA.1,jpeg',
+        '/IMAGES/FERNANDA.1.jpeg',
       description: 'Atención elegante y discreta en Providencia.',
     },
     {
       name: 'Tatiana',
       age: '32 años',
       image:
-        '/IMAGES/TATIANA.1,jpeg',
+        '/IMAGES/TATIANA.1.jpeg',
       description: 'Conexión, relajación y ambiente VIP.',
     },
   ];

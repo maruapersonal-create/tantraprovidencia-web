@@ -27,7 +27,7 @@ export default function TantraProvidencia() {
     <div className="min-h-screen bg-black text-white overflow-hidden font-sans">
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/56944127664"
+        href="https://wa.me/569944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 hover:scale-110 transition duration-300 shadow-2xl rounded-full px-6 py-4 font-bold text-black"
@@ -67,7 +67,7 @@ export default function TantraProvidencia() {
 
             <div className="flex flex-wrap gap-5 mb-10">
               <a
-                href="https://wa.me/56944127664"
+                href="https://wa.me/569944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
                 className="bg-red-600 hover:bg-red-500 px-8 py-5 rounded-2xl text-lg font-bold transition shadow-2xl shadow-red-900/40"
               >
                 Reservar por WhatsApp
@@ -203,7 +203,7 @@ export default function TantraProvidencia() {
                 <p className="text-gray-400 mb-8">{plan.time}</p>
 
                 <a
-                  href="https://wa.me/56944127664"
+                  href="https://wa.me/569944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
                   className="block bg-red-600 hover:bg-red-500 transition py-4 rounded-2xl font-bold"
                 >
                   Reservar
@@ -247,7 +247,7 @@ export default function TantraProvidencia() {
                 </p>
 
                 <a
-                  href="https://wa.me/56944127664"
+                  href="https://wa.me/569944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
                   className="inline-block bg-red-600 hover:bg-red-500 transition px-6 py-4 rounded-2xl font-bold"
                 >
                   Contactar
@@ -303,7 +303,7 @@ export default function TantraProvidencia() {
 
           <div className="flex flex-wrap justify-center gap-5">
             <a
-              href="https://wa.me/56944127664"
+              href="https://wa.me/569944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
               className="bg-red-600 hover:bg-red-500 transition px-10 py-5 rounded-2xl text-xl font-black"
             >
               WhatsApp

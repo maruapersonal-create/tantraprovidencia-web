@@ -270,10 +270,10 @@ export default function TantraProvidencia() {
 
           <div className="grid md:grid-cols-4 gap-5">
             {[
-              'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop',
-              'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1200&auto=format&fit=crop',
-              'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop',
-              'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop',
+              '/IMAGES/DANIELA.2.jpeg',
+              '/IMAGES/FERNANDA.2.jpeg',
+              '/IMAGES/DANIELA.3.jpeg',
+              '/IMAGES/FERNANDA.3.jpeg',
             ].map((img, index) => (
               <div
                 key={index}

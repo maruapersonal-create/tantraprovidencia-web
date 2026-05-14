@@ -178,18 +178,18 @@ export default function TantraProvidencia() {
             {[
               {
                 title: 'Sesión Clásica',
-                price: '$80.000',
+                price: '$50.000',
                 time: '60 minutos',
               },
               {
-                title: 'Experiencia VIP',
-                price: '$140.000',
-                time: '90 minutos',
+                title: 'Experiencia NURU',
+                price: '$65.000',
+                time: '60 minutos',
               },
               {
-                title: 'Luxury Night',
-                price: '$220.000',
-                time: '2 horas',
+                title: 'Luxury Tantrico',
+                price: '$130.000',
+                time: '60 minutos',
               },
             ].map((plan, index) => (
               <div

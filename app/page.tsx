@@ -207,7 +207,36 @@ export default function TantraProvidencia() {
           ))}
         </div>
       </section>
+<section className="bg-black/70 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black mb-5">Galería Premium</h2>
+            <p className="text-gray-400 text-xl">
+              Ambiente exclusivo y elegante.
+            </p>
+          </div>
 
+          <div className="grid md:grid-cols-4 gap-5">
+            {[
+              '/IMAGES/DANIELA.2.jpeg',
+              '/IMAGES/FERNANDA.2.jpeg',
+              '/IMAGES/DANIELA.3.jpeg',
+              '/IMAGES/FERNANDA.3.jpeg',
+            ].map((img, index) => (
+              <div
+                key={index}
+                className="overflow-hidden rounded-[2rem] border border-red-900/40"
+              >
+                <img
+                  src={img}
+                  alt="Galería"
+                  className="w-full h-[350px] object-cover hover:scale-110 transition duration-500"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* Pricing */}
       <section className="bg-red-950/10 border-y border-red-900/30 py-24 px-6">
         <div className="max-w-6xl mx-auto text-center">
@@ -259,36 +288,7 @@ export default function TantraProvidencia() {
       {/* Profiles */}
      
       {/* Gallery */}
-      <section className="bg-black/70 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-black mb-5">Galería Premium</h2>
-            <p className="text-gray-400 text-xl">
-              Ambiente exclusivo y elegante.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-5">
-            {[
-              '/IMAGES/DANIELA.2.jpeg',
-              '/IMAGES/FERNANDA.2.jpeg',
-              '/IMAGES/DANIELA.3.jpeg',
-              '/IMAGES/FERNANDA.3.jpeg',
-            ].map((img, index) => (
-              <div
-                key={index}
-                className="overflow-hidden rounded-[2rem] border border-red-900/40"
-              >
-                <img
-                  src={img}
-                  alt="Galería"
-                  className="w-full h-[350px] object-cover hover:scale-110 transition duration-500"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA */}
       <section className="py-24 px-6">

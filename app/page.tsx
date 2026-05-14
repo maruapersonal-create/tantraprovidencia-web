@@ -165,6 +165,48 @@ export default function TantraProvidencia() {
           ))}
         </div>
       </section>
+ <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-black mb-5">
+            Perfiles Destacados
+          </h2>
+          <p className="text-gray-400 text-xl">
+            Atención elegante y experiencias exclusivas.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {profiles.map((profile, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden rounded-[2rem] border border-red-900/40"
+            >
+              <img
+                src={profile.image}
+                alt={profile.name}
+                className="w-full h-[600px] object-cover group-hover:scale-105 transition duration-500"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+              <div className="absolute bottom-0 p-8">
+                <div className="text-4xl font-black mb-2">{profile.name}</div>
+                <div className="text-red-400 mb-3">{profile.age}</div>
+                <p className="text-gray-300 mb-6 text-lg">
+                  {profile.description}
+                </p>
+
+                <a
+                  href="https://wa.me/56944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
+                  className="inline-block bg-red-600 hover:bg-red-500 transition px-6 py-4 rounded-2xl font-bold"
+                >
+                  Contactar
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Pricing */}
       <section className="bg-red-950/10 border-y border-red-900/30 py-24 px-6">
@@ -215,49 +257,7 @@ export default function TantraProvidencia() {
       </section>
 
       {/* Profiles */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-black mb-5">
-            Perfiles Destacados
-          </h2>
-          <p className="text-gray-400 text-xl">
-            Atención elegante y experiencias exclusivas.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {profiles.map((profile, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-[2rem] border border-red-900/40"
-            >
-              <img
-                src={profile.image}
-                alt={profile.name}
-                className="w-full h-[600px] object-cover group-hover:scale-105 transition duration-500"
-              />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 p-8">
-                <div className="text-4xl font-black mb-2">{profile.name}</div>
-                <div className="text-red-400 mb-3">{profile.age}</div>
-                <p className="text-gray-300 mb-6 text-lg">
-                  {profile.description}
-                </p>
-
-                <a
-                  href="https://wa.me/56944127664?text=Hola%20preciosa,%20vi%20tu%20perfil%20en%20tantraprovidencia.cl%20y%20me%20gustaria%20recibir%20mas%20informacion"
-                  className="inline-block bg-red-600 hover:bg-red-500 transition px-6 py-4 rounded-2xl font-bold"
-                >
-                  Contactar
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
+     
       {/* Gallery */}
       <section className="bg-black/70 py-24 px-6">
         <div className="max-w-7xl mx-auto">

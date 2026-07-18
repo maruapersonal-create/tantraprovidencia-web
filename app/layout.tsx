@@ -23,8 +23,6 @@ const geistMono = Geist_Mono({
     google: 'eVUaLhBGEfXKOVguPiLhZgqamacJ6v4vYseIimMQnBk',
   },
 };
-},
-};
 
 export default function RootLayout({
   children,

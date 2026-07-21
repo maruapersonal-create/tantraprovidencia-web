@@ -62,7 +62,7 @@ const profiles = [
             </div>
 
             <h1 className="text-6xl md:text-8xl font-black leading-none mb-8">
-              Massage fernanda 
+              Massage Fernanda 
               <span className="block text-red-500 drop-shadow-[0_0_25px_rgba(255,0,60,0.7)]">
                 Providencia
               </span>
@@ -114,15 +114,17 @@ const profiles = [
 
     
  <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-black mb-5">
-            Perfiles Destacados
-          </h2>
-          <p className="text-gray-400 text-xl">
-            Atención elegante y experiencias exclusivas.
-          </p>
-        </div>
+       <div className="text-center mb-16">
+  <h2 className="text-5xl font-black mb-5">
+    Perfiles Destacados
+  </h2>
 
+  <p className="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
+    Aquí encontrarás a nuestras masajistas, sus horarios de atención y los
+    valores de nuestros servicios. Revisa los perfiles disponibles y elige
+    la experiencia que mejor se adapte a lo que buscas.
+  </p>
+</div>
         <div className="grid md:grid-cols-3 gap-8">
           {profiles.map((profile, index) => (
             <div
@@ -201,6 +203,28 @@ const profiles = [
             ))}
           </div>
         </div>
+        {/* Contenido Exclusivo de Fernanda */}
+<section className="py-20 text-center">
+  <h2 className="text-4xl font-black mb-4">
+    Contenido Exclusivo de Fernanda
+  </h2>
+
+  <p className="text-gray-300 text-lg mb-10">
+    Haz clic en el logo para acceder al contenido exclusivo de Fernanda.
+  </p>
+
+  <a
+    href="https://arsmate.com/Fershiiss"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      src="/IMAGES/LOGO.PNG"
+      alt="Arsmate"
+      className="w-56 mx-auto hover:scale-105 transition duration-300 cursor-pointer"
+    />
+  </a>
+</section>
       </section>
     </div>
   );

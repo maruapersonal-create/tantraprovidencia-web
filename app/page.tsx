@@ -10,31 +10,20 @@ const profiles = [
     name: 'Fernanda',
     age: '28 años',
     image: '/IMAGES/FERNANDA.1.jpeg',
-    description: 'Horario a consultar disponibilidad',
+    description: 'Martes a Viernes 17:00 a 20:00',
   },
   {
     name: 'Tatiana',
     age: '32 años',
     image: '/IMAGES/TATIANA.1.jpeg',
     description: 'Martes a Viernes · 17:00 a 20:00',
-  },
-  {
-    name: 'Vanesa',
-    age: '24 años',
-    image: '/IMAGES/VANESA.1.jpeg',
-    description: 'Lunes a Jueves · 11:00 a 16:00',
-  },
-  {
-    name: 'Sara',
-    age: '28 años',
-    image: '/IMAGES/SARA.1.jpeg',
-    description: 'Lunes a Viernes · 17:00 a 20:00',
+ 
   },
   {
     name: 'Sofía',
     age: '32 años',
     image: '/IMAGES/SOFIA.1.jpeg',
-    description: 'Viernes y Sábados · 12:00 a 17:00',
+    description: 'Sábados · 12:00 a 17:00',
   },
 ];
     

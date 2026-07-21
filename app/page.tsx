@@ -219,7 +219,7 @@ const profiles = [
     rel="noopener noreferrer"
   >
     <img
-      src="/IMAGES/LOGO.PNG"
+      src="/IMAGES/LOGO2.PNG"
       alt="Arsmate"
       className="w-56 mx-auto hover:scale-105 transition duration-300 cursor-pointer"
     />

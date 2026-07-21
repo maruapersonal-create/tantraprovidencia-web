@@ -89,23 +89,7 @@ const profiles = [
                 Instagram
               </a>
             </div>
-
-            <div className="grid grid-cols-3 gap-6 max-w-xl">
-              <div className="bg-white/5 border border-red-900/40 rounded-2xl p-5 backdrop-blur">
-                <div className="text-3xl font-black text-red-500">Lunes a viernes</div>
-                <div className="text-gray-400 mt-1">Atención</div>
-              </div>
-
-              <div className="bg-white/5 border border-red-900/40 rounded-2xl p-5 backdrop-blur">
-                <div className="text-3xl font-black text-red-500">VIP</div>
-                <div className="text-gray-400 mt-1">Experiencia</div>
-              </div>
-
-              <div className="bg-white/5 border border-red-900/40 rounded-2xl p-5 backdrop-blur">
-                <div className="text-3xl font-black text-red-500">100%</div>
-                <div className="text-gray-400 mt-1">Bienestar</div>
-              </div>
-            </div>
+            
           </div>
 
         

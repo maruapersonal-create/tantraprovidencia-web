@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 
 export default function TantraProvidencia() {
@@ -240,7 +242,7 @@ export default function TantraProvidencia() {
                     {plan.price}
                   </div>
 
-                  {/* BOTÓN SOLICITADO EN LA DESCRIPCIÓN DE CADA SERVICIO */}
+                  {/* BOTÓN EN LA DESCRIPCIÓN DE CADA SERVICIO */}
                   <a
                     href={`${baseWhatsappUrl}${encodeURIComponent(`Hola, me gustaría reservar el servicio: ${plan.title} (${plan.price}). ¿Tienen disponibilidad?`)}`}
                     target="_blank"

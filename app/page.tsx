@@ -269,7 +269,8 @@ export default function TantraProvidencia() {
           </p>
           <div className="pt-2 text-xs text-gray-400 flex flex-wrap justify-center gap-4">
             <span>📍 Cerca de Metro Tobalaba / Providencia</span>
-            <span>🔒 Sector Privado y Discreto</span>
+            <span>🚗 Estacionamiento disponible por solo $3.000 (consultar disponibilidad previa)</span>
+            <span>🔒 Sector Privado</span>
           </div>
         </div>
       </section>

@@ -40,7 +40,7 @@ export default function TantraProvidencia() {
     {
       id: 'relajante',
       title: 'Relajante o Mixto',
-      price: '$40.000',
+      price: '$45.000',
       time: '50 minutos',
       contenido: 'Relaja y libera la tensión acumulada en espalda, brazos y piernas, con técnicas que ayudan a disminuir el estrés y mejorar tu bienestar.'
     },

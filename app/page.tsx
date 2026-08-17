@@ -220,24 +220,37 @@ export default function TantraProvidencia() {
 
   </div>
 </section>
-      {/* 4. CONTENIDO EXCLUSIVO ARSMATE */}
-      <section className="py-12 px-4 text-center bg-zinc-950 border-t border-zinc-900">
-        <h3 className="text-xl font-bold mb-2">Contenido Exclusivo de Fernanda</h3>
-        <p className="text-xs text-gray-400 mb-6">Accede al perfil oficial haciendo clic en la imagen.</p>
-        <a
-          href="https://arsmate.com/Fershiiss"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block hover:scale-105 transition duration-300"
-        >
-          <img
-            src="/IMAGES/LOGO2.PNG"
-            alt="Arsmate"
-            className="w-44 mx-auto"
-          />
-        </a>
-      </section>
+      {/* 4. CONTENIDO EXCLUSIVO */}
+<section className="py-14 px-4 bg-zinc-950 border-t border-zinc-900">
+  <div className="max-w-3xl mx-auto">
+    
+    <div className="bg-black border border-zinc-800 rounded-3xl p-7 sm:p-10 text-center shadow-xl">
 
+      <span className="inline-block mb-4 px-3 py-1 rounded-full border border-red-500/30 bg-red-950/30 text-red-400 text-xs font-semibold uppercase tracking-wider">
+        Contenido exclusivo
+      </span>
+
+      <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
+        Fernanda
+      </h3>
+
+      <p className="text-sm sm:text-base text-gray-400 max-w-md mx-auto leading-relaxed mb-7">
+        Conoce el contenido exclusivo de Fernanda en su perfil oficial.
+      </p>
+
+      <a
+        href="https://arsmate.com/Fershiiss"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center w-full sm:w-auto bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-red-950/50 transition-all hover:scale-105"
+      >
+        Ver perfil de Fernanda →
+      </a>
+
+    </div>
+
+  </div>
+</section>
       {/* FOOTER */}
       <footer className="py-6 border-t border-zinc-900 text-center text-xs text-gray-500">
         <p>© {new Date().getFullYear()} Tantra Providencia. Todos los derechos reservados.</p>

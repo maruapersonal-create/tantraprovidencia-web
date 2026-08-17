@@ -1,41 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function TantraProvidencia() {
-  // Estado para la reserva rápida interactiva
-  const [selectedProfile, setSelectedProfile] = useState('');
-  const [selectedPlan, setSelectedPlan] = useState('');
-  const [bookingDate, setBookingDate] = useState('');
-  const [bookingTime, setBookingTime] = useState('');
-
-  const profiles = [
-    {
-      name: 'DANIELA',
-      age: '36 años',
-      image: '/IMAGES/DANIELA.1.jpeg',
-      description: 'Lunes a Viernes · 11:00 a 18:00',
-    },
-    {
-      name: 'Fernanda',
-      age: '28 años',
-      image: '/IMAGES/FERNANDA.1.jpeg',
-      description: 'Martes a Viernes · 17:00 a 20:00',
-    },
-    {
-      name: 'Tatiana',
-      age: '32 años',
-      image: '/IMAGES/TATIANA.1.jpeg',
-      description: 'Martes a Viernes · 17:00 a 20:00',
-    },
-    {
-      name: 'Sofía',
-      age: '32 años',
-      image: '/IMAGES/SOFIA.1.jpeg',
-      description: 'Sábados · 12:00 a 17:00',
-    },
-  ];
-
   const planes = [
     {
       id: 'relajante',
@@ -61,17 +28,6 @@ export default function TantraProvidencia() {
   ];
 
   const baseWhatsappUrl = "https://wa.me/56944127664?text=";
-
-  // Generador dinámico de enlace de reserva
-  const generateBookingLink = () => {
-    let msg = "¡Hola! Quisiera realizar una reserva:";
-    if (selectedProfile) msg += `\n• Masajista: ${selectedProfile}`;
-    if (selectedPlan) msg += `\n• Servicio: ${selectedPlan}`;
-    if (bookingDate) msg += `\n• Fecha: ${bookingDate}`;
-    if (bookingTime) msg += `\n• Hora preferida: ${bookingTime}`;
-    
-    return `${baseWhatsappUrl}${encodeURIComponent(msg)}`;
-  };
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-red-600 selection:text-white">
@@ -111,14 +67,16 @@ export default function TantraProvidencia() {
 
           <div className="pt-4 flex flex-wrap justify-center gap-4">
             <a
-              href="#reservar"
-              className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-950/80 transition-all hover:scale-105"
+              href={`${baseWhatsappUrl}${encodeURIComponent("Hola, me gustaría agendar una reserva.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-950/80 transition-all hover:scale-105 text-center"
             >
               Agendar Reserva
             </a>
             <a
               href="#servicios"
-              className="w-full sm:w-auto bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 text-gray-200 font-semibold px-8 py-4 rounded-xl transition"
+              className="w-full sm:w-auto bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 text-gray-200 font-semibold px-8 py-4 rounded-xl transition text-center"
             >
               Ver Servicios y Tarifas
             </a>
@@ -126,90 +84,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 2. FORMULARIO INTERACTIVO DE RESERVA */}
-      <section id="reservar" className="py-16 px-4 max-w-4xl mx-auto scroll-mt-10">
-        <div className="bg-gradient-to-b from-zinc-900 to-black border border-red-900/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-rose-500 to-red-600"></div>
-
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">Reserva tu Experiencia</h2>
-            <p className="text-sm text-gray-400">Selecciona tus preferencias y confirma disponibilidad al instante por WhatsApp.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-5 mb-6">
-            {/* Selección de Masajista */}
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
-                1. Selecciona Masajista
-              </label>
-              <select
-                value={selectedProfile}
-                onChange={(e) => setSelectedProfile(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-sm"
-              >
-                <option value="">Cualquier masajista disponible</option>
-                {profiles.map((p, idx) => (
-                  <option key={idx} value={p.name}>{p.name} ({p.age})</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Selección de Plan */}
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
-                2. Selecciona Servicio
-              </label>
-              <select
-                value={selectedPlan}
-                onChange={(e) => setSelectedPlan(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-sm"
-              >
-                <option value="">Selecciona un plan...</option>
-                {planes.map((p, idx) => (
-                  <option key={idx} value={`${p.title} (${p.price})`}>{p.title} - {p.price}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Día */}
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
-                3. Fecha deseada
-              </label>
-              <input
-                type="date"
-                value={bookingDate}
-                onChange={(e) => setBookingDate(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-sm"
-              />
-            </div>
-
-            {/* Hora */}
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
-                4. Horario aproximado
-              </label>
-              <input
-                type="time"
-                value={bookingTime}
-                onChange={(e) => setBookingTime(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-sm"
-              />
-            </div>
-          </div>
-
-          <a
-            href={generateBookingLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full block text-center bg-red-600 hover:bg-red-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-red-950 text-base"
-          >
-            Enviar Solicitud de Reserva por WhatsApp
-          </a>
-        </div>
-      </section>
-
-      {/* 3. PLANES Y VALORES (SERVICIOS) */}
+      {/* 2. PLANES Y VALORES (SERVICIOS) */}
       <section id="servicios" className="py-16 px-4 bg-zinc-950/80 border-y border-zinc-900 scroll-mt-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -242,7 +117,6 @@ export default function TantraProvidencia() {
                     {plan.price}
                   </div>
 
-                  {/* BOTÓN EN LA DESCRIPCIÓN DE CADA SERVICIO */}
                   <a
                     href={`${baseWhatsappUrl}${encodeURIComponent(`Hola, me gustaría reservar el servicio: ${plan.title} (${plan.price}). ¿Tienen disponibilidad?`)}`}
                     target="_blank"
@@ -259,7 +133,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 4. REQUISITOS Y CONDICIONES DE RESERVA */}
+      {/* 3. REQUISITOS Y CONDICIONES DE RESERVA */}
       <section className="py-12 px-4 max-w-4xl mx-auto">
         <div className="border border-red-900/30 bg-red-950/10 rounded-2xl p-6 sm:p-8 text-center space-y-3">
           <h3 className="text-xl font-bold text-red-400">Condiciones para la Reserva</h3>
@@ -275,54 +149,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 5. PERFILES DESTACADOS */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black mb-3">Masajistas Disponibles</h2>
-          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-            Consulta los horarios y disponibilidad de nuestras profesionales.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {profiles.map((profile, index) => (
-            <div
-              key={index}
-              className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden group hover:border-red-600/50 transition duration-300 flex flex-col justify-between"
-            >
-              <div className="relative aspect-[3/4] overflow-hidden bg-zinc-900">
-                <img
-                  src={profile.image}
-                  alt={profile.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-              </div>
-
-              <div className="p-5 space-y-3">
-                <div>
-                  <h3 className="text-xl font-bold text-white">{profile.name}</h3>
-                  <span className="text-xs text-red-400 font-semibold">{profile.age}</span>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {profile.description}
-                </p>
-                <a
-                  href={`${baseWhatsappUrl}${encodeURIComponent(`Hola, quisiera consultar por la disponibilidad de ${profile.name}.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full block text-center bg-zinc-900 hover:bg-red-600 text-white font-bold py-2.5 rounded-xl transition text-xs border border-zinc-800"
-                >
-                  Consultar por {profile.name}
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. CONTENIDO EXCLUSIVO ARSMATE */}
+      {/* 4. CONTENIDO EXCLUSIVO ARSMATE */}
       <section className="py-12 px-4 text-center bg-zinc-950 border-t border-zinc-900">
         <h3 className="text-xl font-bold mb-2">Contenido Exclusivo de Fernanda</h3>
         <p className="text-xs text-gray-400 mb-6">Accede al perfil oficial haciendo clic en la imagen.</p>

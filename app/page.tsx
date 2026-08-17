@@ -133,22 +133,93 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 3. REQUISITOS Y CONDICIONES DE RESERVA */}
-      <section className="py-12 px-4 max-w-4xl mx-auto">
-        <div className="border border-red-900/30 bg-red-950/10 rounded-2xl p-6 sm:p-8 text-center space-y-3">
-          <h3 className="text-xl font-bold text-red-400">Condiciones para la Reserva</h3>
-          <p className="text-sm text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Para confirmar tu hora solicitamos un abono previo de <span className="text-white font-bold">$10.000</span>.
-            Agradecemos puntualidad en tu cita para brindar la mejor atención.
-          </p>
-          <div className="pt-2 text-xs text-gray-400 flex flex-wrap justify-center gap-4">
-            <span>📍 Cerca de Metro Tobalaba / Providencia</span>
-            <span>🚗 Estacionamiento disponible por solo $3.000 (consultar disponibilidad previa)</span>
-            <span>🔒 Sector Privado</span>
-          </div>
-        </div>
-      </section>
+      {/* 3. RESERVA TU HORA */}
+<section className="py-14 px-4 bg-black">
+  <div className="max-w-5xl mx-auto">
 
+    <div className="text-center mb-10">
+      <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+        Reserva tu hora
+      </h2>
+
+      <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
+        Atención personalizada, privada y discreta.
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-5">
+
+      {/* RESERVA */}
+      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-red-600/50 transition">
+        <div className="text-2xl mb-3">📅</div>
+
+        <h3 className="text-lg font-bold text-white mb-3">
+          Reserva
+        </h3>
+
+        <p className="text-sm text-gray-400 leading-relaxed">
+          Para confirmar tu hora se solicita un abono previo de
+          <span className="text-white font-bold"> $10.000</span>.
+        </p>
+      </div>
+
+      {/* PUNTUALIDAD */}
+      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-red-600/50 transition">
+        <div className="text-2xl mb-3">⏰</div>
+
+        <h3 className="text-lg font-bold text-white mb-3">
+          Puntualidad
+        </h3>
+
+        <p className="text-sm text-gray-400 leading-relaxed">
+          Te recomendamos llegar a la hora acordada para disfrutar
+          de tu sesión con tranquilidad.
+        </p>
+      </div>
+
+      {/* UBICACIÓN */}
+      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-red-600/50 transition">
+        <div className="text-2xl mb-3">📍</div>
+
+        <h3 className="text-lg font-bold text-white mb-3">
+          Ubicación
+        </h3>
+
+        <p className="text-sm text-gray-400 leading-relaxed">
+          Providencia · Sector privado
+        </p>
+
+        <div className="mt-3 pt-3 border-t border-zinc-800">
+          <p className="text-sm text-gray-300">
+            🚗 <span className="font-semibold text-white">
+              Estacionamiento disponible
+            </span>
+          </p>
+
+          <p className="text-xs text-gray-500 mt-1">
+            $3.000 · Consultar disponibilidad previamente
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    {/* BOTÓN WHATSAPP */}
+    <div className="text-center mt-8">
+      <a
+        href={`${baseWhatsappUrl}${encodeURIComponent(
+          "Hola, me gustaría reservar una hora. Quisiera consultar disponibilidad."
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-red-950/50 transition-all hover:scale-105"
+      >
+        💬 Confirmar Reserva por WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
       {/* 4. CONTENIDO EXCLUSIVO ARSMATE */}
       <section className="py-12 px-4 text-center bg-zinc-950 border-t border-zinc-900">
         <h3 className="text-xl font-bold mb-2">Contenido Exclusivo de Fernanda</h3>

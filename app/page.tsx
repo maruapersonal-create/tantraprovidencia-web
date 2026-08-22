@@ -1,129 +1,183 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
+
+const PLANES = [
+  {
+    id: 'relajante',
+    title: 'Relajante o Mixto',
+    price: '$45.000',
+    time: '50 min',
+    popular: false,
+    contenido: 'Relaja y libera la tensión acumulada en espalda, brazos y piernas con técnicas profesionales orientadas a renovar tu vitalidad y reducir el estrés.'
+  },
+  {
+    id: 'sens-basico',
+    title: 'Sens Básico',
+    price: '$50.000',
+    time: '50 min',
+    popular: true,
+    contenido: 'Inicia con un masaje terapéutico profesional en zona posterior (espalda, brazos y piernas) y culmina con una refinada experiencia sensorial manual. (Atención en uniforme elegante).'
+  },
+  {
+    id: 'sens-avanzado',
+    title: 'Sens Avanzado',
+    price: '$65.000',
+    time: '50 min',
+    popular: false,
+    contenido: 'Masaje posterior integrativo con técnicas de deslizamiento corporal para una relajación absoluta, finalizando con una experiencia sensorial manual y oral c/c. (Ambos al descubierto).'
+  }
+];
+
+const BASE_WHATSAPP_URL = "https://wa.me/56944127664?text=";
 
 export default function TantraProvidencia() {
-  const planes = [
-    {
-      id: 'relajante',
-      title: 'Relajante o Mixto',
-      price: '$45.000',
-      time: '50 minutos',
-      contenido: 'Relaja y libera la tensión acumulada en espalda, brazos y piernas, con técnicas que ayudan a disminuir el estrés y mejorar tu bienestar.'
-    },
-    {
-      id: 'sens-basico',
-      title: 'Sens Básico',
-      price: '$50.000',
-      time: '50 minutos',
-      contenido: 'Comienza con un masaje profesional en la zona posterior (espalda, brazos y piernas) y finaliza con una experiencia sensorial manual. (masajista con uniforme)'
-    },
-    {
-      id: 'sens-avanzado',
-      title: 'Sens Avanzado',
-      price: '$65.000',
-      time: '50 minutos',
-      contenido: 'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)'
-    }
-  ];
-
-  const baseWhatsappUrl = "https://wa.me/56944127664?text=";
+  const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-red-600 selection:text-white">
-      {/* Botón flotante de WhatsApp */}
+    <div className="min-h-screen bg-[#0A0A0B] text-[#E5E5E7] font-sans selection:bg-[#C5A059] selection:text-black overflow-x-hidden">
+      
+      {/* Botón flotante WhatsApp - Optimizado Móvil */}
       <a
-        href={`${baseWhatsappUrl}${encodeURIComponent("Hola, me gustaría recibir información para agendar un servicio.")}`}
+        href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría recibir información para agendar un servicio.")}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-50 bg-green-500 hover:bg-green-400 text-black font-bold px-5 py-3.5 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 text-sm md:text-base"
+        aria-label="Contactar por WhatsApp"
+        className="fixed bottom-5 right-5 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold px-4 sm:px-5 py-3 sm:py-3.5 rounded-full shadow-[0_10px_25px_rgba(37,211,102,0.3)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2 text-xs sm:text-sm tracking-wide"
       >
-        <span>💬 WhatsApp Directo</span>
+        <span className="text-base sm:text-lg">💬</span>
+        <span className="font-semibold">WhatsApp Directo</span>
       </a>
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-4 py-16 md:py-24">
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center px-4 py-16 sm:py-24 border-b border-[#2A2620]">
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1600&auto=format&fit=crop"
-            alt="Fondo Spa Luxury"
-            className="w-full h-full object-cover opacity-25"
+          <Image
+            src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1600&auto=format&fit=crop"
+            alt="Ambiente Spa De Lujo"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-20 filter brightness-75"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-red-950/40 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/90 via-[#0A0A0B]/60 to-[#0A0A0B]"></div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
-          <span className="inline-block px-4 py-1.5 rounded-full border border-red-500/50 bg-red-950/40 text-red-400 text-xs md:text-sm font-semibold uppercase tracking-widest backdrop-blur">
-            Providencia • Las Condes
-          </span>
+        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-5 sm:space-y-7">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-[#C5A059]/40 bg-[#C5A059]/10 text-[#D4AF37] text-xs font-medium uppercase tracking-[0.2em] backdrop-blur-md">
+            <span>✨</span> Providencia · Experiencia Exclusiva
+          </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-tight">
-            Massage <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-red-600">Providencia</span>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-light text-[#F3EFE0] tracking-tight leading-tight">
+            Massage <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3EFE0] to-[#C5A059]">Providencia</span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Masajes profesionales y experiencias exclusivas en una ubicación privada y discreta.
+          <p className="text-sm sm:text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto font-light leading-relaxed px-2">
+            El arte del bienestar, la relajación profunda y la privacidad absoluta en un entorno diseñado para tus sentidos.
           </p>
 
-          <div className="pt-4 flex flex-wrap justify-center gap-4">
+          <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-md mx-auto">
             <a
-              href={`${baseWhatsappUrl}${encodeURIComponent("Hola, me gustaría agendar una reserva.")}`}
+              href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría agendar una reserva.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-950/80 transition-all hover:scale-105 text-center"
+              className="w-full sm:w-auto bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] hover:from-[#D4AF37] hover:to-[#B38F48] text-black font-semibold px-8 py-3.5 sm:py-4 rounded-xl shadow-[0_4px_20px_rgba(197,160,89,0.25)] transition-all hover:scale-[1.02] active:scale-95 text-center text-sm sm:text-base"
             >
-              Agendar Reserva
+              Agendar Cita Privada
             </a>
             <a
               href="#servicios"
-              className="w-full sm:w-auto bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 text-gray-200 font-semibold px-8 py-4 rounded-xl transition text-center"
+              className="w-full sm:w-auto bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 text-zinc-200 font-medium px-8 py-3.5 sm:py-4 rounded-xl transition-all text-center text-sm sm:text-base backdrop-blur-sm"
             >
-              Ver Servicios y Tarifas
+              Ver Servicios
             </a>
           </div>
         </div>
       </section>
 
-      {/* 2. PLANES Y VALORES (SERVICIOS) */}
-      <section id="servicios" className="py-16 px-4 bg-zinc-950/80 border-y border-zinc-900 scroll-mt-10">
+      {/* 2. POR QUÉ ELEGIRNOS (VALOR AGREGADO) */}
+      <section className="py-10 px-4 bg-[#0D0D0E] border-b border-zinc-800/60 text-center">
+        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="p-3 sm:p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/40">
+            <span className="text-xl sm:text-2xl block mb-1">🔒</span>
+            <h4 className="text-xs sm:text-sm font-semibold text-[#D4AF37]">100% Discreto</h4>
+            <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5">Atención privada individual</p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/40">
+            <span className="text-xl sm:text-2xl block mb-1">🌿</span>
+            <h4 className="text-xs sm:text-sm font-semibold text-[#D4AF37]">Espacio Climatizado</h4>
+            <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5">Ambiente cálido y aromas</p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/40">
+            <span className="text-xl sm:text-2xl block mb-1">🚿</span>
+            <h4 className="text-xs sm:text-sm font-semibold text-[#D4AF37]">Ducha Disponible</h4>
+            <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5">Máximo confort e higiene</p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/40">
+            <span className="text-xl sm:text-2xl block mb-1">🚗</span>
+            <h4 className="text-xs sm:text-sm font-semibold text-[#D4AF37]">Estacionamiento</h4>
+            <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5">Acceso seguro y fácil</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. SERVICIOS Y TARIFAS */}
+      <section id="servicios" className="py-16 sm:py-20 px-4 bg-[#0A0A0B] scroll-mt-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">Servicios y Tarifas</h2>
-            <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
-              Atención personalizada de alta calidad diseñada para tu confort.
-            </p>
+          <div className="text-center mb-10 sm:mb-14 space-y-2">
+            <span className="text-[#C5A059] text-xs font-semibold tracking-widest uppercase">Experiencias Exclusivas</span>
+            <h2 className="text-2xl sm:text-4xl font-serif text-[#F3EFE0]">Servicios y Tarifas</h2>
+            <div className="w-12 h-0.5 bg-[#C5A059] mx-auto mt-3 opacity-60"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {planes.map((plan, index) => (
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            {PLANES.map((plan) => (
               <div
-                key={index}
-                className="bg-black/90 border border-zinc-800 hover:border-red-600/60 rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 shadow-xl group hover:-translate-y-1"
+                key={plan.id}
+                className={`relative bg-gradient-to-b from-zinc-900/90 to-zinc-950 border ${
+                  plan.popular ? 'border-[#C5A059] shadow-[0_0_25px_rgba(197,160,89,0.15)]' : 'border-zinc-800/80 hover:border-zinc-700'
+                } rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group`}
               >
+                {plan.popular && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C5A059] text-black font-semibold text-[10px] sm:text-xs uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                    Más Solicitado
+                  </span>
+                )}
+
                 <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-white group-hover:text-red-400 transition">{plan.title}</h3>
-                    <span className="text-xs bg-red-950/80 border border-red-800/50 text-red-300 px-2.5 py-1 rounded-full font-medium">
-                      {plan.time}
+                  <div className="flex justify-between items-start mb-4 gap-2">
+                    <h3 className="text-lg sm:text-xl font-serif text-[#F3EFE0] group-hover:text-[#D4AF37] transition">
+                      {plan.title}
+                    </h3>
+                    <span className="text-[11px] sm:text-xs bg-zinc-800/80 border border-zinc-700/60 text-zinc-300 px-2.5 py-1 rounded-full font-mono whitespace-nowrap">
+                      ⏱ {plan.time}
                     </span>
                   </div>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6 font-light">
                     {plan.contenido}
                   </p>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-zinc-800">
-                  <div className="text-3xl font-black text-red-500">
-                    {plan.price}
+                <div className="space-y-4 pt-4 border-t border-zinc-800/80">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-xs text-zinc-500 uppercase tracking-wider">Valor Sesión</span>
+                    <span className="text-2xl sm:text-3xl font-serif text-[#D4AF37]">
+                      {plan.price}
+                    </span>
                   </div>
 
                   <a
-                    href={`${baseWhatsappUrl}${encodeURIComponent(`Hola, me gustaría reservar el servicio: ${plan.title} (${plan.price}). ¿Tienen disponibilidad?`)}`}
+                    href={`${BASE_WHATSAPP_URL}${encodeURIComponent(`Hola, me gustaría reservar el servicio: ${plan.title} (${plan.price}). ¿Tienen disponibilidad?`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-zinc-900 hover:bg-red-600 text-gray-200 hover:text-white font-bold py-3 px-4 rounded-xl transition duration-200 border border-zinc-700 hover:border-red-500 text-sm"
+                    className={`w-full inline-flex items-center justify-center gap-2 ${
+                      plan.popular 
+                        ? 'bg-[#C5A059] hover:bg-[#D4AF37] text-black font-semibold' 
+                        : 'bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 font-medium'
+                    } py-3 px-4 rounded-xl transition duration-200 text-xs sm:text-sm tracking-wide`}
                   >
-                    <span>Reservar este Servicio</span>
+                    <span>Reservar Servicio</span>
                     <span>→</span>
                   </a>
                 </div>
@@ -133,127 +187,102 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 3. RESERVA TU HORA */}
-<section className="py-14 px-4 bg-black">
-  <div className="max-w-5xl mx-auto">
+      {/* 4. RESERVA TU HORA */}
+      <section className="py-14 sm:py-16 px-4 bg-[#0D0D0E] border-t border-zinc-800/60">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10 space-y-2">
+            <h2 className="text-2xl sm:text-3xl font-serif text-[#F3EFE0]">Información de Reserva</h2>
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto font-light">
+              Proceso sencillo y transparente para garantizar tu horario.
+            </p>
+          </div>
 
-    <div className="text-center mb-10">
-      <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
-        Reserva tu hora
-      </h2>
+          <div className="grid md:grid-cols-3 gap-5">
+            {/* RESERVA */}
+            <div className="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-lg">
+                📅
+              </div>
+              <h3 className="text-base font-serif text-[#F3EFE0] mb-2">Abono de Reserva</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light">
+                Para agendar y asegurar tu hora requerimos un abono de <span className="text-[#D4AF37] font-semibold">$10.000</span>.
+              </p>
+            </div>
 
-      <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
-        Atención personalizada, privada y discreta.
-      </p>
-    </div>
+            {/* PUNTUALIDAD */}
+            <div className="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-lg">
+                ⏰
+              </div>
+              <h3 className="text-base font-serif text-[#F3EFE0] mb-2">Puntualidad</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light">
+                Agradecemos llegar a la hora exacta convenida para disfrutar íntegramente de tu sesión.
+              </p>
+            </div>
 
-    <div className="grid md:grid-cols-3 gap-5">
+            {/* UBICACIÓN */}
+            <div className="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-lg">
+                📍
+              </div>
+              <h3 className="text-base font-serif text-[#F3EFE0] mb-2">Ubicación Privada</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light">
+                Providencia · Sector exclusivo.
+              </p>
+              <div className="mt-3 pt-3 border-t border-zinc-800/60 text-xs text-zinc-400">
+                <span>🚗 Estacionamiento opcional: </span>
+                <span className="text-[#D4AF37]">$3.000</span>
+              </div>
+            </div>
+          </div>
 
-      {/* RESERVA */}
-      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-red-600/50 transition">
-        <div className="text-2xl mb-3">📅</div>
-
-        <h3 className="text-lg font-bold text-white mb-3">
-          Reserva
-        </h3>
-
-        <p className="text-sm text-gray-400 leading-relaxed">
-          Para confirmar tu hora se solicita un abono previo de
-          <span className="text-white font-bold"> $10.000</span>.
-        </p>
-      </div>
-
-      {/* PUNTUALIDAD */}
-      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-red-600/50 transition">
-        <div className="text-2xl mb-3">⏰</div>
-
-        <h3 className="text-lg font-bold text-white mb-3">
-          Puntualidad
-        </h3>
-
-        <p className="text-sm text-gray-400 leading-relaxed">
-          Te recomendamos llegar a la hora acordada para disfrutar
-          de tu sesión con tranquilidad.
-        </p>
-      </div>
-
-      {/* UBICACIÓN */}
-      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-red-600/50 transition">
-        <div className="text-2xl mb-3">📍</div>
-
-        <h3 className="text-lg font-bold text-white mb-3">
-          Ubicación
-        </h3>
-
-        <p className="text-sm text-gray-400 leading-relaxed">
-          Providencia · Sector privado
-        </p>
-
-        <div className="mt-3 pt-3 border-t border-zinc-800">
-          <p className="text-sm text-gray-300">
-            🚗 <span className="font-semibold text-white">
-              Estacionamiento disponible
-            </span>
-          </p>
-
-          <p className="text-xs text-gray-500 mt-1">
-            $3.000 · Consultar disponibilidad previamente
-          </p>
+          <div className="text-center mt-8">
+            <a
+              href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría reservar una hora. Quisiera consultar disponibilidad.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] hover:from-[#D4AF37] hover:to-[#B38F48] text-black font-semibold px-7 py-3.5 rounded-xl shadow-[0_4px_20px_rgba(197,160,89,0.2)] transition-all hover:scale-105 text-xs sm:text-sm tracking-wide"
+            >
+              <span>💬 Consultar Disponibilidad por WhatsApp</span>
+            </a>
+          </div>
         </div>
-      </div>
+      </section>
 
-    </div>
+      {/* 5. PERFIL EXCLUSIVO */}
+      <section className="py-14 sm:py-16 px-4 bg-[#0A0A0B] border-t border-zinc-800/60">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-gradient-to-b from-zinc-900/80 to-zinc-950 border border-[#C5A059]/30 rounded-3xl p-7 sm:p-10 text-center shadow-xl relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#C5A059]/10 rounded-full blur-2xl pointer-events-none"></div>
 
-    {/* BOTÓN WHATSAPP */}
-    <div className="text-center mt-8">
-      <a
-        href={`${baseWhatsappUrl}${encodeURIComponent(
-          "Hola, me gustaría reservar una hora. Quisiera consultar disponibilidad."
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-red-950/50 transition-all hover:scale-105"
-      >
-        💬 Confirmar Reserva por WhatsApp
-      </a>
-    </div>
+            <span className="inline-block mb-3 px-3 py-1 rounded-full border border-[#C5A059]/40 bg-[#C5A059]/10 text-[#D4AF37] text-[10px] sm:text-xs font-medium uppercase tracking-widest">
+              Perfil Exclusivo
+            </span>
 
-  </div>
-</section>
-      {/* 4. CONTENIDO EXCLUSIVO */}
-<section className="py-14 px-4 bg-zinc-950 border-t border-zinc-900">
-  <div className="max-w-3xl mx-auto">
-    
-    <div className="bg-black border border-zinc-800 rounded-3xl p-7 sm:p-10 text-center shadow-xl">
+            <h3 className="text-2xl sm:text-3xl font-serif text-[#F3EFE0] mb-2">
+              Fernanda
+            </h3>
 
-      <span className="inline-block mb-4 px-3 py-1 rounded-full border border-red-500/30 bg-red-950/30 text-red-400 text-xs font-semibold uppercase tracking-wider">
-        Contenido exclusivo
-      </span>
+            <p className="text-xs sm:text-sm text-zinc-400 max-w-sm mx-auto font-light leading-relaxed mb-6">
+              Descubre contenido exclusivo y perfiles oficiales.
+            </p>
 
-      <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
-        Fernanda
-      </h3>
+            <a
+              href="https://arsmate.com/Fershiiss"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-full sm:w-auto bg-zinc-800 hover:bg-zinc-700 text-[#D4AF37] border border-[#C5A059]/40 font-medium px-8 py-3.5 rounded-xl transition-all text-xs sm:text-sm tracking-wide"
+            >
+              Ver perfil oficial →
+            </a>
+          </div>
+        </div>
+      </section>
 
-      <p className="text-sm sm:text-base text-gray-400 max-w-md mx-auto leading-relaxed mb-7">
-        Conoce el contenido exclusivo de Fernanda en su perfil oficial.
-      </p>
-
-      <a
-        href="https://arsmate.com/Fershiiss"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-full sm:w-auto bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-red-950/50 transition-all hover:scale-105"
-      >
-        Ver perfil de Fernanda →
-      </a>
-
-    </div>
-
-  </div>
-</section>
       {/* FOOTER */}
-      <footer className="py-6 border-t border-zinc-900 text-center text-xs text-gray-500">
-        <p>© {new Date().getFullYear()} Tantra Providencia. Todos los derechos reservados.</p>
+      <footer className="py-8 border-t border-zinc-800/60 text-center text-[11px] sm:text-xs text-zinc-500 font-light">
+        <p>© {currentYear} Tantra Providencia · Todos los derechos reservados.</p>
+        <p className="mt-1 text-zinc-600">Atención privada bajo previa reserva.</p>
       </footer>
     </div>
   );

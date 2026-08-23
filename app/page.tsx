@@ -59,7 +59,7 @@ export default function TantraProvidencia() {
       </a>
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center justify-center px-4 py-20 overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center px-4 py-16 overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#C5A059]/15 rounded-full blur-[140px] pointer-events-none z-10"></div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[350px] h-[200px] bg-[#8C232B]/20 rounded-full blur-[100px] pointer-events-none z-10"></div>
 
@@ -75,7 +75,7 @@ export default function TantraProvidencia() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#070708]/90 via-[#070708]/65 to-[#070708]"></div>
         </div>
 
-        <div className="relative z-20 max-w-4xl mx-auto text-center space-y-8">
+        <div className="relative z-20 max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#C5A059]/40 bg-[#070708]/80 text-[#D4AF37] text-[11px] sm:text-xs font-light tracking-[0.25em] uppercase backdrop-blur-md shadow-lg">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse"></span>
             Providencia • Sector Exclusivo
@@ -89,7 +89,7 @@ export default function TantraProvidencia() {
             Un santuario privado de relajación, discreción y revitalización sensorial diseñado minuciosamente para tu bienestar.
           </p>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto px-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto px-4">
             <a
               href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría agendar una reserva.")}`}
               target="_blank"
@@ -109,7 +109,7 @@ export default function TantraProvidencia() {
       </section>
 
       {/* 2. PILARES DE EXCELENCIA */}
-      <section className="py-12 px-4 relative z-20">
+      <section className="py-10 px-4 relative z-20">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {[
             { icon: '🔒', title: 'Absoluta Discreción', desc: 'Atención 100% privada e individual' },
@@ -130,15 +130,15 @@ export default function TantraProvidencia() {
       </section>
 
       {/* 3. SERVICIOS Y TARIFAS */}
-      <section id="servicios" className="py-20 px-4 relative z-20 scroll-mt-10">
+      <section id="servicios" className="py-14 px-4 relative z-20 scroll-mt-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 space-y-3">
+          <div className="text-center mb-12 space-y-2">
             <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Carta de Servicios</span>
             <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#F3EFE0]">Experiencias & Tarifas</h2>
-            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-4"></div>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 sm:gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {PLANES.map((plan) => (
               <div
                 key={plan.id}
@@ -197,46 +197,69 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 4. PROTOCOLO DE AGENDA */}
-      <section className="py-16 px-4 bg-gradient-to-b from-transparent via-zinc-950/90 to-transparent border-y border-zinc-900 relative z-20">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12 space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-serif text-[#F3EFE0]">Protocolo de Agenda</h2>
-            <p className="text-zinc-400 text-xs sm:text-sm font-light">
-              Garantizamos exclusividad y tiempo dedicado para cada cliente.
-            </p>
+      {/* 4. PROTOCOLO DE AGENDA Y POLÍTICAS DE RESERVA */}
+      <section className="py-14 px-4 bg-gradient-to-b from-transparent via-zinc-950/90 to-transparent border-y border-zinc-900/80 relative z-20">
+        <div className="max-w-5xl mx-auto space-y-12">
+          
+          {/* Bloque: Protocolo de Reserva */}
+          <div>
+            <div className="text-center mb-8 space-y-2">
+              <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.25em] uppercase">Condiciones del Servicio</span>
+              <h2 className="text-2xl sm:text-3xl font-serif text-[#F3EFE0]">Protocolo de Agenda</h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-5">
+              <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-2.5 text-center backdrop-blur-md">
+                <span className="text-2xl block">🗓️</span>
+                <h3 className="text-sm font-serif text-[#F3EFE0]">Abono Confirmatorio</h3>
+                <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                  Para asegurar la disponibilidad en agenda se solicita un abono previo de <span className="text-[#D4AF37] font-medium">$10.000</span>.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-2.5 text-center backdrop-blur-md">
+                <span className="text-2xl block">⏳</span>
+                <h3 className="text-sm font-serif text-[#F3EFE0]">Puntualidad</h3>
+                <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                  Recomendamos asistir con puntualidad para disfrutar de la totalidad de su tiempo reservado.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-2.5 text-center backdrop-blur-md">
+                <span className="text-2xl block">📍</span>
+                <h3 className="text-sm font-serif text-[#F3EFE0]">Ubicación & Parking</h3>
+                <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                  Sector Providencia privado. Estacionamiento previo requerimiento (<span className="text-[#D4AF37]">$3.000</span>).
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-3 text-center backdrop-blur-md">
-              <span className="text-2xl block">🗓️</span>
-              <h3 className="text-sm font-serif text-[#F3EFE0]">Abono Confirmatorio</h3>
-              <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                Para asegurar la disponibilidad en agenda se solicita un abono previo de <span className="text-[#D4AF37] font-medium">$10.000</span>.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-3 text-center backdrop-blur-md">
-              <span className="text-2xl block">⏳</span>
-              <h3 className="text-sm font-serif text-[#F3EFE0]">Puntualidad</h3>
-              <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                Recomendamos asistir con la puntualidad acordada para disfrutar de la totalidad de su tiempo reservado.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-3 text-center backdrop-blur-md">
-              <span className="text-2xl block">📍</span>
-              <h3 className="text-sm font-serif text-[#F3EFE0]">Ubicación & Parking</h3>
-              <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                Sector Providencia privado. Estacionamiento previo requerimiento (<span className="text-[#D4AF37]">$3.000</span>).
-              </p>
+          {/* Bloque: Reprogramaciones e Inasistencias */}
+          <div className="max-w-3xl mx-auto rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-zinc-900/80 via-zinc-900/95 to-zinc-900/80 border border-[#C5A059]/40 backdrop-blur-xl shadow-xl">
+            <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+              <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-xl shrink-0">
+                🔄
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="text-base sm:text-lg font-serif text-[#F3EFE0]">
+                  Reprogramaciones e Inasistencias
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
+                  Las reservaciones pueden reprogramarse avisando con al menos <span className="text-[#D4AF37] font-medium">2 horas de anticipación</span>.
+                </p>
+                <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                  Si el cliente no asiste sin previo aviso, el abono no es reembolsable.
+                </p>
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
       {/* 5. SECCIÓN PERFIL EXCLUSIVO */}
-      <section className="py-20 px-4 relative z-20">
+      <section className="py-14 px-4 relative z-20">
         <div className="max-w-xl mx-auto">
           <div className="relative rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950 border border-[#C5A059]/40 shadow-2xl overflow-hidden backdrop-blur-xl">
             <div className="absolute top-0 right-0 w-40 h-40 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none"></div>

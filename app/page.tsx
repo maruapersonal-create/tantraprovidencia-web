@@ -18,7 +18,7 @@ const PLANES = [
     title: 'Sens Básico',
     price: '$50.000',
     time: '50 min',
-    popular: true,
+    popular: false,
     tag: 'Experiencia Recomendada',
     contenido: 'Sesión progresiva que inicia con masaje terapéutico en zona posterior y culmina con una refinada estimulación sensorial manual. (Masajista con uniforme clínico exclusivo).'
   },
@@ -27,13 +27,14 @@ const PLANES = [
     title: 'Sens Avanzado',
     price: '$65.000',
     time: '50 min',
-    popular: false,
-    tag: 'Sensorial Completo',
+    popular: true,
+    tag: 'MÁS SOLICITADO',
     contenido: 'Técnicas integrativas de contacto corporal completo para una relajación profunda, finalizando con una experiencia sensorial manual y oral c/c. (Ambos al descubierto).'
   }
 ];
 
 const BASE_WHATSAPP_URL = "https://wa.me/56944127664?text=";
+const SPA_BACKGROUND_IMAGE = "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1920&auto=format&fit=crop";
 
 export default function TantraProvidencia() {
   const currentYear = new Date().getFullYear();
@@ -41,7 +42,7 @@ export default function TantraProvidencia() {
   return (
     <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-[#C5A059]/30 selection:text-[#F3EFE0] overflow-x-hidden relative">
       
-      {/* Botón flotante de WhatsApp optimizado */}
+      {/* Botón flotante de WhatsApp */}
       <a
         href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría recibir información para agendar un servicio.")}`}
         target="_blank"
@@ -57,36 +58,34 @@ export default function TantraProvidencia() {
         </span>
       </a>
 
-      {/* 1. HERO SECTION ATMOSFÉRICO */}
+      {/* 1. HERO SECTION */}
       <section className="relative min-h-[92vh] flex items-center justify-center px-4 py-20 overflow-hidden">
-        {/* Glow Effects de fondo */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#C5A059]/10 rounded-full blur-[140px] pointer-events-none"></div>
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[350px] h-[200px] bg-[#8C232B]/15 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#C5A059]/15 rounded-full blur-[140px] pointer-events-none z-10"></div>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[350px] h-[200px] bg-[#8C232B]/20 rounded-full blur-[100px] pointer-events-none z-10"></div>
 
-        {/* Imagen de fondo con overlay suave */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1600&auto=format&fit=crop"
-            alt="Ambiente Spa De Lujo"
+            src={SPA_BACKGROUND_IMAGE}
+            alt="Centro de Spa Tranquilo con Camilla y Velas"
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-15 filter contrast-125 saturate-50"
+            className="object-cover object-center opacity-30 filter brightness-90 contrast-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#070708] via-[#070708]/70 to-[#070708]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#070708]/90 via-[#070708]/65 to-[#070708]"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#C5A059]/30 bg-[#C5A059]/5 text-[#D4AF37] text-[11px] sm:text-xs font-light tracking-[0.25em] uppercase backdrop-blur-md shadow-inner">
+        <div className="relative z-20 max-w-4xl mx-auto text-center space-y-8">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#C5A059]/40 bg-[#070708]/80 text-[#D4AF37] text-[11px] sm:text-xs font-light tracking-[0.25em] uppercase backdrop-blur-md shadow-lg">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse"></span>
             Providencia • Sector Exclusivo
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extralight text-[#F3EFE0] tracking-tight leading-[1.15]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extralight text-[#F3EFE0] tracking-tight leading-[1.15] drop-shadow-md">
             Massage <span className="font-normal italic bg-gradient-to-r from-[#D4AF37] via-[#F3EFE0] to-[#9E7D3B] bg-clip-text text-transparent">Providencia</span>
           </h1>
 
-          <p className="text-sm sm:text-lg text-zinc-300 max-w-xl mx-auto font-light leading-relaxed px-4">
+          <p className="text-sm sm:text-lg text-zinc-200 max-w-xl mx-auto font-light leading-relaxed px-4 drop-shadow">
             Un santuario privado de relajación, discreción y revitalización sensorial diseñado minuciosamente para tu bienestar.
           </p>
 
@@ -95,22 +94,22 @@ export default function TantraProvidencia() {
               href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría agendar una reserva.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto min-w-[200px] bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold px-8 py-4 rounded-xl shadow-[0_4px_25px_rgba(197,160,89,0.25)] transition-all duration-300 hover:scale-[1.02] active:scale-95 text-center text-xs sm:text-sm uppercase tracking-widest"
+              className="w-full sm:w-auto min-w-[200px] bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold px-8 py-4 rounded-xl shadow-[0_4px_25px_rgba(197,160,89,0.3)] transition-all duration-300 hover:scale-[1.02] active:scale-95 text-center text-xs sm:text-sm uppercase tracking-widest"
             >
               Consultar Horarios
             </a>
             <a
               href="#servicios"
-              className="w-full sm:w-auto min-w-[200px] bg-zinc-900/60 hover:bg-zinc-800/80 border border-zinc-700/50 hover:border-[#C5A059]/50 text-zinc-300 font-light px-8 py-4 rounded-xl transition-all duration-300 text-center text-xs sm:text-sm uppercase tracking-widest backdrop-blur-md"
+              className="w-full sm:w-auto min-w-[200px] bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/80 hover:border-[#C5A059]/60 text-zinc-200 font-light px-8 py-4 rounded-xl transition-all duration-300 text-center text-xs sm:text-sm uppercase tracking-widest backdrop-blur-md shadow-lg"
             >
-              Explorar Menu
+              Explorar Menú
             </a>
           </div>
         </div>
       </section>
 
       {/* 2. PILARES DE EXCELENCIA */}
-      <section className="py-12 px-4 relative z-10">
+      <section className="py-12 px-4 relative z-20">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {[
             { icon: '🔒', title: 'Absoluta Discreción', desc: 'Atención 100% privada e individual' },
@@ -120,7 +119,7 @@ export default function TantraProvidencia() {
           ].map((item, idx) => (
             <div
               key={idx}
-              className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-zinc-900/40 to-zinc-950/60 border border-zinc-800/50 backdrop-blur-sm text-center space-y-1.5"
+              className="p-4 sm:p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md text-center space-y-1.5 shadow-lg"
             >
               <span className="text-xl sm:text-2xl block">{item.icon}</span>
               <h4 className="text-xs sm:text-sm font-medium text-[#F3EFE0]">{item.title}</h4>
@@ -131,7 +130,7 @@ export default function TantraProvidencia() {
       </section>
 
       {/* 3. SERVICIOS Y TARIFAS */}
-      <section id="servicios" className="py-20 px-4 relative scroll-mt-10">
+      <section id="servicios" className="py-20 px-4 relative z-20 scroll-mt-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 space-y-3">
             <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Carta de Servicios</span>
@@ -143,14 +142,14 @@ export default function TantraProvidencia() {
             {PLANES.map((plan) => (
               <div
                 key={plan.id}
-                className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-500 group ${
+                className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-500 group backdrop-blur-xl ${
                   plan.popular
-                    ? 'bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950 border border-[#C5A059]/60 shadow-[0_10px_40px_rgba(197,160,89,0.12)]'
-                    : 'bg-zinc-900/30 border border-zinc-800/60 hover:border-zinc-700/80 hover:bg-zinc-900/50'
+                    ? 'bg-gradient-to-b from-zinc-900/95 via-zinc-900/80 to-zinc-950 border border-[#C5A059]/80 shadow-[0_10px_40px_rgba(197,160,89,0.2)]'
+                    : 'bg-zinc-900/60 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/80'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] text-black font-semibold text-[10px] uppercase tracking-widest px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] text-black font-bold text-[10px] uppercase tracking-widest px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
                     {plan.tag}
                   </div>
                 )}
@@ -160,17 +159,17 @@ export default function TantraProvidencia() {
                     <h3 className="text-xl font-serif text-[#F3EFE0] group-hover:text-[#D4AF37] transition-colors duration-300">
                       {plan.title}
                     </h3>
-                    <span className="text-[11px] font-mono text-zinc-400 bg-zinc-800/50 border border-zinc-700/40 px-3 py-1 rounded-full whitespace-nowrap">
+                    <span className="text-[11px] font-mono text-zinc-300 bg-zinc-800/80 border border-zinc-700/60 px-3 py-1 rounded-full whitespace-nowrap">
                       {plan.time}
                     </span>
                   </div>
                   
-                  <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-8 font-light">
+                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-8 font-light">
                     {plan.contenido}
                   </p>
                 </div>
 
-                <div className="space-y-5 pt-6 border-t border-zinc-800/60">
+                <div className="space-y-5 pt-6 border-t border-zinc-800/80">
                   <div className="flex items-baseline justify-between">
                     <span className="text-[11px] text-zinc-400 uppercase tracking-wider font-light">Inversión</span>
                     <span className="text-3xl font-serif text-[#D4AF37] tracking-tight">
@@ -185,7 +184,7 @@ export default function TantraProvidencia() {
                     className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-medium ${
                       plan.popular
                         ? 'bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] hover:brightness-110 text-black shadow-md'
-                        : 'bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 border border-zinc-700/50'
+                        : 'bg-zinc-800/90 hover:bg-zinc-700 text-zinc-100 border border-zinc-700/60'
                     }`}
                   >
                     <span>Reservar Servicio</span>
@@ -198,8 +197,8 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 4. POLITICA DE RESERVAS */}
-      <section className="py-16 px-4 bg-gradient-to-b from-transparent via-zinc-950/80 to-transparent border-y border-zinc-900">
+      {/* 4. PROTOCOLO DE AGENDA */}
+      <section className="py-16 px-4 bg-gradient-to-b from-transparent via-zinc-950/90 to-transparent border-y border-zinc-900 relative z-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 space-y-2">
             <h2 className="text-2xl sm:text-3xl font-serif text-[#F3EFE0]">Protocolo de Agenda</h2>
@@ -209,7 +208,7 @@ export default function TantraProvidencia() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 space-y-3 text-center">
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-3 text-center backdrop-blur-md">
               <span className="text-2xl block">🗓️</span>
               <h3 className="text-sm font-serif text-[#F3EFE0]">Abono Confirmatorio</h3>
               <p className="text-xs text-zinc-400 font-light leading-relaxed">
@@ -217,7 +216,7 @@ export default function TantraProvidencia() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 space-y-3 text-center">
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-3 text-center backdrop-blur-md">
               <span className="text-2xl block">⏳</span>
               <h3 className="text-sm font-serif text-[#F3EFE0]">Puntualidad</h3>
               <p className="text-xs text-zinc-400 font-light leading-relaxed">
@@ -225,7 +224,7 @@ export default function TantraProvidencia() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 space-y-3 text-center">
+            <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-3 text-center backdrop-blur-md">
               <span className="text-2xl block">📍</span>
               <h3 className="text-sm font-serif text-[#F3EFE0]">Ubicación & Parking</h3>
               <p className="text-xs text-zinc-400 font-light leading-relaxed">
@@ -237,9 +236,9 @@ export default function TantraProvidencia() {
       </section>
 
       {/* 5. SECCIÓN PERFIL EXCLUSIVO */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 relative z-20">
         <div className="max-w-xl mx-auto">
-          <div className="relative rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-zinc-950 border border-[#C5A059]/30 shadow-2xl overflow-hidden backdrop-blur-xl">
+          <div className="relative rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950 border border-[#C5A059]/40 shadow-2xl overflow-hidden backdrop-blur-xl">
             <div className="absolute top-0 right-0 w-40 h-40 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <span className="inline-block mb-4 px-3.5 py-1 rounded-full border border-[#C5A059]/40 bg-[#C5A059]/10 text-[#D4AF37] text-[10px] font-medium uppercase tracking-[0.2em]">
@@ -267,7 +266,7 @@ export default function TantraProvidencia() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-8 border-t border-zinc-900 text-center text-[11px] text-zinc-400 font-light space-y-1">
+      <footer className="py-8 border-t border-zinc-900 text-center text-[11px] text-zinc-400 font-light space-y-1 relative z-20">
         <p>© {currentYear} Tantra Providencia. Todos los derechos reservados.</p>
         <p className="text-zinc-500">Atención profesional bajo cita previa.</p>
       </footer>

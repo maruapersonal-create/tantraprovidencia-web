@@ -20,7 +20,7 @@ const PLANES = [
     time: '50 min',
     popular: false,
     tag: 'Experiencia Recomendada',
-    contenido: 'Sesión progresiva que inicia con masaje terapéutico en zona posterior y culmina con una refinada estimulación sensorial manual. (Masajista con uniforme clínico exclusivo).'
+    contenido: 'Comienza con un masaje profesional en la zona posterior (espalda, brazos y piernas) y finaliza con una experiencia sensorial manual. (masajista con uniforme)'
   },
   {
     id: 'sens-avanzado',
@@ -29,7 +29,7 @@ const PLANES = [
     time: '50 min',
     popular: true,
     tag: 'MÁS SOLICITADO',
-    contenido: 'Técnicas integrativas de contacto corporal completo para una relajación profunda, finalizando con una experiencia sensorial manual y oral c/c. (Ambos al descubierto).'
+    contenido: 'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)'
   }
 ];
 

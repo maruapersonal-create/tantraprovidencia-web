@@ -108,28 +108,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 2. PILARES DE EXCELENCIA */}
-      <section className="py-10 px-4 relative z-20">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          {[
-            { icon: '🔒', title: 'Absoluta Discreción', desc: 'Atención 100% privada e individual' },
-            { icon: '🕯️', title: 'Ambiente Climatizado', desc: 'Aromaterapia y climatización' },
-            { icon: '🚿', title: 'Ducha Privada', desc: 'Instalaciones equipadas para confort' },
-            { icon: '🚗', title: 'Estacionamiento', desc: 'Acceso reservado y seguro' },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="p-4 sm:p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md text-center space-y-1.5 shadow-lg"
-            >
-              <span className="text-xl sm:text-2xl block">{item.icon}</span>
-              <h4 className="text-xs sm:text-sm font-medium text-[#F3EFE0]">{item.title}</h4>
-              <p className="text-[11px] text-zinc-400 font-light leading-snug">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. SERVICIOS Y TARIFAS */}
+      {/* 2. SERVICIOS Y TARIFAS */}
       <section id="servicios" className="py-14 px-4 relative z-20 scroll-mt-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 space-y-2">
@@ -197,9 +176,9 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 4. PROTOCOLO DE AGENDA Y POLÍTICAS DE RESERVA */}
+      {/* 3. PROTOCOLO DE AGENDA Y POLÍTICAS */}
       <section className="py-14 px-4 bg-gradient-to-b from-transparent via-zinc-950/90 to-transparent border-y border-zinc-900/80 relative z-20">
-        <div className="max-w-5xl mx-auto space-y-12">
+        <div className="max-w-5xl mx-auto space-y-10">
           
           {/* Bloque: Protocolo de Reserva */}
           <div>
@@ -255,10 +234,31 @@ export default function TantraProvidencia() {
             </div>
           </div>
 
+          {/* Bloque: Pilares de Excelencia (Ubicado justo después de Reprogramaciones) */}
+          <div className="pt-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              {[
+                { icon: '🔒', title: 'Absoluta Discreción', desc: 'Atención 100% privada e individual' },
+                { icon: '🕯️', title: 'Ambiente Climatizado', desc: 'Aromaterapia y climatización' },
+                { icon: '🚿', title: 'Ducha Privada', desc: 'Instalaciones equipadas para confort' },
+                { icon: '🚗', title: 'Estacionamiento', desc: 'Acceso reservado y seguro' },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 sm:p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md text-center space-y-1.5 shadow-lg hover:border-zinc-700 transition-colors"
+                >
+                  <span className="text-xl sm:text-2xl block">{item.icon}</span>
+                  <h4 className="text-xs sm:text-sm font-medium text-[#F3EFE0]">{item.title}</h4>
+                  <p className="text-[11px] text-zinc-400 font-light leading-snug">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 5. SECCIÓN PERFIL EXCLUSIVO */}
+      {/* 4. SECCIÓN PERFIL EXCLUSIVO */}
       <section className="py-14 px-4 relative z-20">
         <div className="max-w-xl mx-auto">
           <div className="relative rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950 border border-[#C5A059]/40 shadow-2xl overflow-hidden backdrop-blur-xl">

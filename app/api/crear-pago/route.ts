@@ -1,17 +1,22 @@
 import { NextResponse } from 'next/server';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN || '',
-});
-
 export async function POST(request: Request) {
   try {
-    const { titulo, precioNeto } = await request.json();
+    const token = process.env.MP_ACCESS_TOKEN;
 
-    // Cálculo del IVA (19%)
-    const iva = Math.round(precioNeto * 0.19);
-    const totalConIva = precioNeto + iva;
+    if (!token) {
+      console.error('ERROR: No se encontró MP_ACCESS_TOKEN en .env.local');
+      return NextResponse.json({ error: 'Falta el token de Mercado Pago' }, { status: 500 });
+    }
+
+    const client = new MercadoPagoConfig({ accessToken: token });
+    const body = await request.json();
+    const { titulo, precioNeto } = body;
+
+    // Convertir a número y calcular el total con IVA (19%)
+    const valorBase = Number(precioNeto);
+    const totalConIva = Math.round(valorBase * 1.19);
 
     const preference = new Preference(client);
     const result = await preference.create({
@@ -19,24 +24,27 @@ export async function POST(request: Request) {
         items: [
           {
             id: 'reserva-servicio',
-            title: `Reserva: ${titulo} (IVA incl.)`,
+            title: `Reserva: ${titulo} (Incluye IVA)`,
             quantity: 1,
             unit_price: totalConIva,
             currency_id: 'CLP',
           },
         ],
-        back_urls: {
-          success: 'https://tantraprovidencia.cl', // Reemplaza por tu dominio real
-          failure: 'https://tantraprovidencia.cl',
-          pending: 'https://tantraprovidencia.cl',
-        },
-        auto_return: 'approved',
       },
     });
 
-    return NextResponse.json({ init_point: result.init_point });
-  } catch (error) {
-    console.error('Error al generar pago:', error);
-    return NextResponse.json({ error: 'Error procesando el pago' }, { status: 500 });
+    const initPoint = result.init_point || result.sandbox_init_point;
+
+    if (!initPoint) {
+      throw new Error('Mercado Pago no devolvió la URL de pago');
+    }
+
+    return NextResponse.json({ url: initPoint });
+  } catch (error: any) {
+    console.error('Error detallado de Mercado Pago:', error);
+    return NextResponse.json(
+      { error: error?.message || 'Error al generar el pago' },
+      { status: 500 }
+    );
   }
 }

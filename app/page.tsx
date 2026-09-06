@@ -91,30 +91,28 @@ export default function TantraProvidencia() {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   // Función para procesar pago con Mercado Pago (Servicio + IVA 19% calculado internamente)
-  const handlePagarServicio = async (planId: string, titulo: string, precioNeto: number) => {
-    try {
-      setLoadingPlan(planId);
-      const res = await fetch('/api/crear-pago', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titulo, precioNeto }),
-      });
+ const handlePago = async (titulo: string, precioNeto: number) => {
+  setCargandoPago(titulo);
+  try {
+    const res = await fetch('/api/crear-pago', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ titulo, precioNeto }),
+    });
 
-      const data = await res.json();
-      if (data.init_point) {
-        // Redirige al checkout seguro de Mercado Pago
-        window.location.href = data.init_point;
-      } else {
-        alert('Ocurrió un error al generar el enlace de pago.');
-      }
-    } catch (error) {
-      console.error('Error al procesar el pago:', error);
-      alert('Error de conexión al procesar el pago.');
-    } finally {
-      setLoadingPlan(null);
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert(data.error || 'Ocurrió un error al generar el enlace de pago');
     }
-  };
-
+  } catch (error) {
+    alert('Error al conectar con el servidor de pago');
+  } finally {
+    setCargandoPago(null);
+  }
+};
   // Bloqueo de zoom por gestos táctiles y ratón
   useEffect(() => {
     const handleTouchMove = (e: TouchEvent) => {

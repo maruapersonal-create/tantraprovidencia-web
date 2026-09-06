@@ -300,6 +300,76 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
+      {/* 4. INFORMACIÓN DE UBICACIÓN Y POLÍTICAS DE RESERVA */}
+      <section id="informacion" className="py-14 px-4 relative z-20 border-t border-zinc-900/80">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-[#C5A059]/40 rounded-3xl p-8 sm:p-12 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="text-center mb-8 space-y-2">
+              <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Información Importante</span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-light text-[#F3EFE0]">Ubicación & Políticas de Reserva</h2>
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 text-zinc-300 text-sm">
+              {/* Ubicación y Estacionamiento */}
+              <div className="space-y-4 bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800/80">
+                <div className="flex items-start gap-3">
+                  <span className="text-xl">📍</span>
+                  <div>
+                    <h4 className="font-semibold text-[#F3EFE0] uppercase tracking-wider text-xs mb-1">Ubicación</h4>
+                    <p className="font-light text-zinc-300">Metro Tobalaba / Providencia</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 pt-3 border-t border-zinc-800">
+                  <span className="text-xl">🚗</span>
+                  <div>
+                    <h4 className="font-semibold text-[#F3EFE0] uppercase tracking-wider text-xs mb-1">Estacionamiento</h4>
+                    <p className="font-light text-zinc-300">$3.000 por hora</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Políticas de Reserva */}
+              <div className="space-y-4 bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800/80">
+                <div className="flex items-start gap-3">
+                  <span className="text-xl">💳</span>
+                  <div>
+                    <h4 className="font-semibold text-[#F3EFE0] uppercase tracking-wider text-xs mb-1">Reserva de Hora</h4>
+                    <p className="font-light text-zinc-300">Reservas únicamente con abono de <strong className="text-[#D4AF37] font-semibold">$10.000</strong>.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 pt-3 border-t border-zinc-800">
+                  <span className="text-xl">⚠️</span>
+                  <div>
+                    <h4 className="font-semibold text-[#F3EFE0] uppercase tracking-wider text-xs mb-1">Puntualidad y Cancelación</h4>
+                    <ul className="space-y-1 font-light text-zinc-300 text-xs sm:text-sm list-disc list-inside">
+                      <li>Abono <strong className="text-red-400 font-normal">no reembolsable</strong> si no asistes.</li>
+                      <li>No se permiten atrasos (el tiempo de atraso se descuenta de tu servicio).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <a
+                href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, leí las políticas y me gustaría consultar disponibilidad para agendar.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold px-8 py-3.5 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 text-xs uppercase tracking-widest"
+              >
+                <span>Entendido, Agendar Reserva</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* MODAL FOTOS MASAJISTAS */}
       {selectedMasajista && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">

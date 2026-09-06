@@ -39,8 +39,8 @@ const PLANES = [
     contenido: 'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)'
   },
   {
-    id: 'masaje-full',
-    title: 'Masaje Full',
+    id: 'masaje-exclusivo-vip',
+    title: 'Masaje Exclusivo VIP',
     price: '$100.000',
     time: '50 min',
     popular: false,

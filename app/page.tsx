@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Masajista {
   id: string;
@@ -89,8 +89,39 @@ export default function TantraProvidencia() {
   const [selectedMasajista, setSelectedMasajista] = useState<Masajista | null>(null);
   const [showMasajistas, setShowMasajistas] = useState<boolean>(false);
 
+  // Bloqueo de zoom por gestos táctiles (Pinch-to-zoom y Gestures)
+  useEffect(() => {
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+
+    const handleGestureStart = (e: Event) => {
+      e.preventDefault();
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchstart', handleTouchMove, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('gesturestart', handleGestureStart, { passive: false });
+    document.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchMove);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('gesturestart', handleGestureStart);
+      document.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-[#C5A059]/30 selection:text-[#F3EFE0] overflow-x-hidden relative">
+    <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-[#C5A059]/30 selection:text-[#F3EFE0] overflow-x-hidden relative select-none touch-manipulation">
       
       {/* Botón flotante de WhatsApp */}
       <a
@@ -117,7 +148,9 @@ export default function TantraProvidencia() {
           <img
             src={SPA_BACKGROUND_IMAGE}
             alt="Centro de Spa Tranquilo con Camilla y Velas"
-            className="w-full h-full object-cover object-center opacity-30 filter brightness-90 contrast-110"
+            className="w-full h-full object-cover object-center opacity-30 filter brightness-90 contrast-110 pointer-events-none select-none"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#070708]/90 via-[#070708]/65 to-[#070708]"></div>
         </div>
@@ -258,7 +291,9 @@ export default function TantraProvidencia() {
                     <img
                       src={masajista.coverImage}
                       alt={masajista.name}
-                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                      onContextMenu={(e) => e.preventDefault()}
+                      onDragStart={(e) => e.preventDefault()}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                     
@@ -300,7 +335,9 @@ export default function TantraProvidencia() {
                     <img
                       src={photo}
                       alt={`Foto ${idx + 1} de ${selectedMasajista.name}`}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain pointer-events-none select-none"
+                      onContextMenu={(e) => e.preventDefault()}
+                      onDragStart={(e) => e.preventDefault()}
                     />
                   </div>
                 ))}

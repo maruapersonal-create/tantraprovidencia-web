@@ -88,31 +88,7 @@ export default function TantraProvidencia() {
   const currentYear = new Date().getFullYear();
   const [selectedMasajista, setSelectedMasajista] = useState<Masajista | null>(null);
   const [showMasajistas, setShowMasajistas] = useState<boolean>(false);
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
-  // Función para procesar pago con Mercado Pago (Servicio + IVA 19% calculado internamente)
- const handlePago = async (titulo: string, precioNeto: number) => {
-  setCargandoPago(titulo);
-  try {
-    const res = await fetch('/api/crear-pago', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ titulo, precioNeto }),
-    });
-
-    const data = await res.json();
-
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert(data.error || 'Ocurrió un error al generar el enlace de pago');
-    }
-  } catch (error) {
-    alert('Error al conectar con el servidor de pago');
-  } finally {
-    setCargandoPago(null);
-  }
-};
   // Bloqueo de zoom por gestos táctiles y ratón
   useEffect(() => {
     const handleTouchMove = (e: TouchEvent) => {
@@ -252,18 +228,19 @@ export default function TantraProvidencia() {
                     </span>
                   </div>
 
-                  <button
-                    onClick={() => handlePagarServicio(plan.id, plan.title, plan.priceNeto)}
-                    disabled={loadingPlan === plan.id}
-                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-medium cursor-pointer ${
+                  <a
+                    href={`${BASE_WHATSAPP_URL}${encodeURIComponent(`Hola, me interesa agendar el servicio ${plan.title} ($${plan.priceNeto.toLocaleString('es-CL')}).`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-medium text-center ${
                       plan.popular
                         ? 'bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] hover:brightness-110 text-black shadow-md'
                         : 'bg-zinc-800/90 hover:bg-zinc-700 text-zinc-100 border border-zinc-700/60'
                     }`}
                   >
-                    <span>{loadingPlan === plan.id ? 'Generando pago...' : 'Pagar con Webpay / MP'}</span>
+                    <span>Agendar por WhatsApp</span>
                     <span className="text-sm">→</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}

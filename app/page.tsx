@@ -53,32 +53,32 @@ const MASAJISTAS: Masajista[] = [
   {
     id: 'fernanda',
     name: 'Fernanda',
-    coverImage: '/MFERNANDA.jpeg',
-    photos: ['/MFERNANDA.jpeg']
+    coverImage: '/IMAGES/MFERNANDA.jpeg',
+    photos: ['/IMAGES/MFERNANDA.jpeg']
   },
   {
     id: 'daniela',
     name: 'Daniela',
-    coverImage: '/MDANIELA.jpeg',
-    photos: ['/MDANIELA.jpeg']
+    coverImage: '/IMAGES/MDANIELA.jpeg',
+    photos: ['/IMAGES/MDANIELA.jpeg']
   },
   {
     id: 'mara',
     name: 'Mara',
-    coverImage: '/MMARA.jpeg',
-    photos: ['/MMARA.jpeg']
+    coverImage: '/IMAGES/MMARA.jpeg',
+    photos: ['/IMAGES/MMARA.jpeg']
   },
   {
     id: 'tatiana',
     name: 'Tatiana',
-    coverImage: '/MTATIANA.jpeg',
-    photos: ['/MTATIANA.jpeg']
+    coverImage: '/IMAGES/MTATIANA.jpeg',
+    photos: ['/IMAGES/MTATIANA.jpeg']
   },
   {
     id: 'josefa',
     name: 'Josefa',
-    coverImage: '/MJOSEFA.jpeg',
-    photos: ['/MJOSEFA.jpeg']
+    coverImage: '/IMAGES/MJOSEFA.jpeg',
+    photos: ['/IMAGES/MJOSEFA.jpeg']
   }
 ];
 

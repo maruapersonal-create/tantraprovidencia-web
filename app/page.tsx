@@ -13,7 +13,7 @@ const PLANES = [
   {
     id: 'relajante',
     title: 'Relajante o Mixto',
-    price: '$45.000',
+    priceNeto: 45000,
     time: '50 min',
     popular: false,
     tag: 'Bienestar Integral',
@@ -22,7 +22,7 @@ const PLANES = [
   {
     id: 'sens-basico',
     title: 'Sens Básico',
-    price: '$50.000',
+    priceNeto: 50000,
     time: '50 min',
     popular: false,
     tag: 'Experiencia Recomendada',
@@ -31,7 +31,7 @@ const PLANES = [
   {
     id: 'sens-avanzado',
     title: 'Sens Avanzado',
-    price: '$65.000',
+    priceNeto: 65000,
     time: '50 min',
     popular: true,
     tag: 'MÁS SOLICITADO',
@@ -40,7 +40,7 @@ const PLANES = [
   {
     id: 'masaje-full',
     title: 'Masaje Full',
-    price: '$100.000',
+    priceNeto: 100000,
     time: '50 min',
     popular: false,
     tag: 'Exclusivo',
@@ -88,23 +88,41 @@ export default function TantraProvidencia() {
   const currentYear = new Date().getFullYear();
   const [selectedMasajista, setSelectedMasajista] = useState<Masajista | null>(null);
   const [showMasajistas, setShowMasajistas] = useState<boolean>(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
-  // Bloqueo de zoom por gestos táctiles (Pinch-to-zoom y Gestures)
+  // Función para procesar pago con Mercado Pago (Servicio + IVA 19% calculado internamente)
+  const handlePagarServicio = async (planId: string, titulo: string, precioNeto: number) => {
+    try {
+      setLoadingPlan(planId);
+      const res = await fetch('/api/crear-pago', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, precioNeto }),
+      });
+
+      const data = await res.json();
+      if (data.init_point) {
+        // Redirige al checkout seguro de Mercado Pago
+        window.location.href = data.init_point;
+      } else {
+        alert('Ocurrió un error al generar el enlace de pago.');
+      }
+    } catch (error) {
+      console.error('Error al procesar el pago:', error);
+      alert('Error de conexión al procesar el pago.');
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
+  // Bloqueo de zoom por gestos táctiles y ratón
   useEffect(() => {
     const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 1) {
-        e.preventDefault();
-      }
+      if (e.touches.length > 1) e.preventDefault();
     };
-
-    const handleGestureStart = (e: Event) => {
-      e.preventDefault();
-    };
-
+    const handleGestureStart = (e: Event) => e.preventDefault();
     const handleWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
+      if (e.ctrlKey) e.preventDefault();
     };
 
     document.addEventListener('touchstart', handleTouchMove, { passive: false });
@@ -147,7 +165,7 @@ export default function TantraProvidencia() {
         <div className="absolute inset-0 z-0">
           <img
             src={SPA_BACKGROUND_IMAGE}
-            alt="Centro de Spa Tranquilo con Camilla y Velas"
+            alt="Centro de Spa"
             className="w-full h-full object-cover object-center opacity-30 filter brightness-90 contrast-110 pointer-events-none select-none"
             onContextMenu={(e) => e.preventDefault()}
             onDragStart={(e) => e.preventDefault()}
@@ -223,32 +241,31 @@ export default function TantraProvidencia() {
                     </span>
                   </div>
                   
-                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-8 font-light">
+                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-6 font-light">
                     {plan.contenido}
                   </p>
                 </div>
 
-                <div className="space-y-5 pt-6 border-t border-zinc-800/80">
+                <div className="space-y-4 pt-6 border-t border-zinc-800/80">
                   <div className="flex items-baseline justify-between">
-                    <span className="text-[11px] text-zinc-400 uppercase tracking-wider font-light">Inversión</span>
-                    <span className="text-3xl font-serif text-[#D4AF37] tracking-tight">
-                      {plan.price}
+                    <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">Valor</span>
+                    <span className="text-2xl font-serif text-[#D4AF37] font-bold">
+                      ${plan.priceNeto.toLocaleString('es-CL')}
                     </span>
                   </div>
 
-                  <a
-                    href={`${BASE_WHATSAPP_URL}${encodeURIComponent(`Hola, me gustaría reservar el servicio: ${plan.title} (${plan.price}). ¿Tienen disponibilidad?`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-medium ${
+                  <button
+                    onClick={() => handlePagarServicio(plan.id, plan.title, plan.priceNeto)}
+                    disabled={loadingPlan === plan.id}
+                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-medium cursor-pointer ${
                       plan.popular
                         ? 'bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] hover:brightness-110 text-black shadow-md'
                         : 'bg-zinc-800/90 hover:bg-zinc-700 text-zinc-100 border border-zinc-700/60'
                     }`}
                   >
-                    <span>Reservar Servicio</span>
+                    <span>{loadingPlan === plan.id ? 'Generando pago...' : 'Pagar con Webpay / MP'}</span>
                     <span className="text-sm">→</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -256,7 +273,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 3. SECCIÓN MASAJISTAS (CON BOTÓN DE MOSTRAR / OCULTAR) */}
+      {/* 3. SECCIÓN MASAJISTAS */}
       <section id="masajistas" className="py-14 px-4 relative z-20 border-t border-zinc-900/80">
         <div className="max-w-6xl mx-auto text-center">
           <div className="mb-8 space-y-2">
@@ -265,7 +282,6 @@ export default function TantraProvidencia() {
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
           </div>
 
-          {/* Botón Interactivo */}
           <div className="mb-10">
             <button
               onClick={() => setShowMasajistas(!showMasajistas)}
@@ -278,7 +294,6 @@ export default function TantraProvidencia() {
             </button>
           </div>
 
-          {/* Galería desplegable */}
           {showMasajistas && (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto transition-all duration-500">
               {MASAJISTAS.map((masajista) => (
@@ -310,12 +325,11 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* MODAL DE FOTOS DE MASAJISTA */}
+      {/* MODAL FOTOS MASAJISTAS */}
       {selectedMasajista && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
           <div className="relative w-full max-w-3xl max-h-[90vh] bg-zinc-900 border border-[#C5A059]/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
             
-            {/* Header del Modal */}
             <div className="p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-950/80">
               <h3 className="text-2xl font-serif text-[#F3EFE0]">{selectedMasajista.name}</h3>
               <button
@@ -327,7 +341,6 @@ export default function TantraProvidencia() {
               </button>
             </div>
 
-            {/* Galería de Fotos */}
             <div className="p-4 sm:p-6 overflow-y-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {selectedMasajista.photos.map((photo, idx) => (
@@ -344,7 +357,6 @@ export default function TantraProvidencia() {
               </div>
             </div>
 
-            {/* Footer del Modal */}
             <div className="p-4 border-t border-zinc-800 bg-zinc-950/80 flex justify-end">
               <a
                 href={`${BASE_WHATSAPP_URL}${encodeURIComponent(`Hola, me gustaría agendar una hora con ${selectedMasajista.name}.`)}`}
@@ -359,115 +371,6 @@ export default function TantraProvidencia() {
           </div>
         </div>
       )}
-
-      {/* 4. PROTOCOLO DE AGENDA Y POLÍTICAS */}
-      <section className="py-14 px-4 bg-gradient-to-b from-transparent via-zinc-950/90 to-transparent border-y border-zinc-900/80 relative z-20">
-        <div className="max-w-5xl mx-auto space-y-10">
-          
-          <div>
-            <div className="text-center mb-8 space-y-2">
-              <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.25em] uppercase">Condiciones del Servicio</span>
-              <h2 className="text-2xl sm:text-3xl font-serif text-[#F3EFE0]">Protocolo de Agenda</h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-5">
-              <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-2.5 text-center backdrop-blur-md">
-                <span className="text-2xl block">🗓️</span>
-                <h3 className="text-sm font-serif text-[#F3EFE0]">Abono Confirmatorio</h3>
-                <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                  Para asegurar la disponibilidad en agenda se solicita un abono previo de <span className="text-[#D4AF37] font-medium">$10.000</span>.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-2.5 text-center backdrop-blur-md">
-                <span className="text-2xl block">⏳</span>
-                <h3 className="text-sm font-serif text-[#F3EFE0]">Puntualidad</h3>
-                <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                  Recomendamos asistir con puntualidad para disfrutar de la totalidad de su tiempo reservado.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 space-y-2.5 text-center backdrop-blur-md">
-                <span className="text-2xl block">📍</span>
-                <h3 className="text-sm font-serif text-[#F3EFE0]">Ubicación & Parking</h3>
-                <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                  Sector Providencia privado. Estacionamiento previo requerimiento (<span className="text-[#D4AF37]">$3.000</span>).
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-zinc-900/80 via-zinc-900/95 to-zinc-900/80 border border-[#C5A059]/40 backdrop-blur-xl shadow-xl">
-            <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-              <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-xl shrink-0">
-                🔄
-              </div>
-              <div className="space-y-1.5">
-                <h3 className="text-base sm:text-lg font-serif text-[#F3EFE0]">
-                  Reprogramaciones e Inasistencias
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
-                  Las reservaciones pueden reprogramarse avisando con al menos <span className="text-[#D4AF37] font-medium">2 horas de anticipación</span>.
-                </p>
-                <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                  Si el cliente no asiste sin previo aviso, el abono no es reembolsable.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-              {[
-                { icon: '🔒', title: 'Absoluta Discreción', desc: 'Atención 100% privada e individual' },
-                { icon: '🕯️', title: 'Ambiente Climatizado', desc: 'Aromaterapia y climatización' },
-                { icon: '🚿', title: 'Ducha Privada', desc: 'Instalaciones equipadas para confort' },
-                { icon: '🚗', title: 'Estacionamiento', desc: 'Acceso reservado y seguro' },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 sm:p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md text-center space-y-1.5 shadow-lg hover:border-zinc-700 transition-colors"
-                >
-                  <span className="text-xl sm:text-2xl block">{item.icon}</span>
-                  <h4 className="text-xs sm:text-sm font-medium text-[#F3EFE0]">{item.title}</h4>
-                  <p className="text-[11px] text-zinc-400 font-light leading-snug">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 5. SECCIÓN PERFIL EXCLUSIVO */}
-      <section className="py-14 px-4 relative z-20">
-        <div className="max-w-xl mx-auto">
-          <div className="relative rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950 border border-[#C5A059]/40 shadow-2xl overflow-hidden backdrop-blur-xl">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <span className="inline-block mb-4 px-3.5 py-1 rounded-full border border-[#C5A059]/40 bg-[#C5A059]/10 text-[#D4AF37] text-[10px] font-medium uppercase tracking-[0.2em]">
-              Contenido Oficial
-            </span>
-
-            <h3 className="text-3xl font-serif text-[#F3EFE0] mb-3">
-              Fernanda
-            </h3>
-
-            <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed mb-8 max-w-sm mx-auto">
-              Accede al perfil profesional y contenido exclusivo oficial.
-            </p>
-
-            <a
-              href="https://arsmate.com/Fershiiss"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-zinc-800/90 hover:bg-zinc-700/80 text-[#D4AF37] border border-[#C5A059]/40 hover:border-[#D4AF37] font-medium px-8 py-3.5 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest"
-            >
-              Ver perfil en Arsmate →
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* FOOTER */}
       <footer className="py-8 border-t border-zinc-900 text-center text-[11px] text-zinc-400 font-light space-y-1 relative z-20">

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 
 interface Masajista {
   id: string;
@@ -39,8 +38,8 @@ const PLANES = [
     contenido: 'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)'
   },
   {
-    id: 'masaje-exclusivo-vip',
-    title: 'Masaje Exclusivo VIP',
+    id: 'masaje-full',
+    title: 'Masaje Full',
     price: '$100.000',
     time: '50 min',
     popular: false,
@@ -88,6 +87,7 @@ const SPA_BACKGROUND_IMAGE = "https://images.unsplash.com/photo-1600334089648-b0
 export default function TantraProvidencia() {
   const currentYear = new Date().getFullYear();
   const [selectedMasajista, setSelectedMasajista] = useState<Masajista | null>(null);
+  const [showMasajistas, setShowMasajistas] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-[#C5A059]/30 selection:text-[#F3EFE0] overflow-x-hidden relative">
@@ -114,13 +114,10 @@ export default function TantraProvidencia() {
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[350px] h-[200px] bg-[#8C232B]/20 rounded-full blur-[100px] pointer-events-none z-10"></div>
 
         <div className="absolute inset-0 z-0">
-          <Image
+          <img
             src={SPA_BACKGROUND_IMAGE}
             alt="Centro de Spa Tranquilo con Camilla y Velas"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center opacity-30 filter brightness-90 contrast-110"
+            className="w-full h-full object-cover object-center opacity-30 filter brightness-90 contrast-110"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#070708]/90 via-[#070708]/65 to-[#070708]"></div>
         </div>
@@ -226,47 +223,61 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* SECCIÓN MASAJISTAS (ORDEN DE LAS 5 CHICAS) */}
+      {/* 3. SECCIÓN MASAJISTAS (CON BOTÓN DE MOSTRAR / OCULTAR) */}
       <section id="masajistas" className="py-14 px-4 relative z-20 border-t border-zinc-900/80">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 space-y-2">
-            <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Staff</span>
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="mb-8 space-y-2">
+            <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Staff Exclusivo</span>
             <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#F3EFE0]">Nuestras Masajistas</h2>
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-            {MASAJISTAS.map((masajista) => (
-              <div
-                key={masajista.id}
-                onClick={() => setSelectedMasajista(masajista)}
-                className="group relative rounded-3xl overflow-hidden bg-zinc-900/60 border border-zinc-800/80 hover:border-[#C5A059]/60 transition-all duration-500 cursor-pointer shadow-xl"
-              >
-                <div className="relative h-80 w-full overflow-hidden">
-                  <Image
-                    src={masajista.coverImage}
-                    alt={masajista.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 20vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-90 group-hover:brightness-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-                  
-                  <div className="absolute bottom-4 left-0 right-0 text-center">
-                    <h3 className="text-2xl font-serif text-[#F3EFE0] group-hover:text-[#D4AF37] transition-colors">
-                      {masajista.name}
-                    </h3>
+          {/* Botón Interactivo */}
+          <div className="mb-10">
+            <button
+              onClick={() => setShowMasajistas(!showMasajistas)}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 border border-[#C5A059]/60 hover:border-[#D4AF37] text-[#F3EFE0] px-8 py-4 rounded-2xl shadow-[0_4px_20px_rgba(197,160,89,0.15)] transition-all duration-300 hover:scale-105 active:scale-95 text-xs sm:text-sm uppercase tracking-widest font-medium cursor-pointer"
+            >
+              <span>{showMasajistas ? 'Ocultar Staff' : 'Ver Staff / Galería'}</span>
+              <span className={`transition-transform duration-300 text-base ${showMasajistas ? 'rotate-180' : 'rotate-0'}`}>
+                ▼
+              </span>
+            </button>
+          </div>
+
+          {/* Galería desplegable */}
+          {showMasajistas && (
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto transition-all duration-500">
+              {MASAJISTAS.map((masajista) => (
+                <div
+                  key={masajista.id}
+                  onClick={() => setSelectedMasajista(masajista)}
+                  className="group relative rounded-3xl overflow-hidden bg-zinc-950 border border-zinc-800/80 hover:border-[#C5A059]/60 transition-all duration-500 cursor-pointer shadow-xl"
+                >
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/60">
+                    <img
+                      src={masajista.coverImage}
+                      alt={masajista.name}
+                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                    
+                    <div className="absolute bottom-3 left-0 right-0 text-center">
+                      <h3 className="text-xl sm:text-2xl font-serif text-[#F3EFE0] group-hover:text-[#D4AF37] transition-colors">
+                        {masajista.name}
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* MODAL DE FOTOS DE MASAJISTA */}
       {selectedMasajista && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity animate-in fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
           <div className="relative w-full max-w-3xl max-h-[90vh] bg-zinc-900 border border-[#C5A059]/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
             
             {/* Header del Modal */}
@@ -282,16 +293,14 @@ export default function TantraProvidencia() {
             </div>
 
             {/* Galería de Fotos */}
-            <div className="p-6 overflow-y-auto">
+            <div className="p-4 sm:p-6 overflow-y-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {selectedMasajista.photos.map((photo, idx) => (
-                  <div key={idx} className="relative h-64 rounded-xl overflow-hidden border border-zinc-800">
-                    <Image
+                  <div key={idx} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-zinc-800 bg-black">
+                    <img
                       src={photo}
                       alt={`Foto ${idx + 1} de ${selectedMasajista.name}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 ))}
@@ -314,11 +323,10 @@ export default function TantraProvidencia() {
         </div>
       )}
 
-      {/* 3. PROTOCOLO DE AGENDA Y POLÍTICAS */}
+      {/* 4. PROTOCOLO DE AGENDA Y POLÍTICAS */}
       <section className="py-14 px-4 bg-gradient-to-b from-transparent via-zinc-950/90 to-transparent border-y border-zinc-900/80 relative z-20">
         <div className="max-w-5xl mx-auto space-y-10">
           
-          {/* Bloque: Protocolo de Reserva */}
           <div>
             <div className="text-center mb-8 space-y-2">
               <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.25em] uppercase">Condiciones del Servicio</span>
@@ -352,7 +360,6 @@ export default function TantraProvidencia() {
             </div>
           </div>
 
-          {/* Bloque: Reprogramaciones e Inasistencias */}
           <div className="max-w-3xl mx-auto rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-zinc-900/80 via-zinc-900/95 to-zinc-900/80 border border-[#C5A059]/40 backdrop-blur-xl shadow-xl">
             <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
               <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-xl shrink-0">
@@ -372,7 +379,6 @@ export default function TantraProvidencia() {
             </div>
           </div>
 
-          {/* Bloque: Pilares de Excelencia */}
           <div className="pt-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
               {[
@@ -396,7 +402,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 4. SECCIÓN PERFIL EXCLUSIVO */}
+      {/* 5. SECCIÓN PERFIL EXCLUSIVO */}
       <section className="py-14 px-4 relative z-20">
         <div className="max-w-xl mx-auto">
           <div className="relative rounded-3xl p-8 sm:p-10 text-center bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950 border border-[#C5A059]/40 shadow-2xl overflow-hidden backdrop-blur-xl">

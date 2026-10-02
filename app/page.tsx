@@ -522,4 +522,4 @@ export default function TantraProvidencia() {
       </footer>
     </div>
   );
-}git add .
+}

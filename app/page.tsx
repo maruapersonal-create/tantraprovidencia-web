@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Masajista {
   id: string;
   name: string;
   coverImage: string;
   photos: string[];
+  video?: string;
 }
 
 const PLANES = [
@@ -53,31 +55,29 @@ const MASAJISTAS: Masajista[] = [
     id: 'fernanda',
     name: 'Fernanda',
     coverImage: '/IMAGES/MFERNANDA.jpeg',
-    photos: ['/IMAGES/MFERNANDA.jpeg']
+    photos: ['/IMAGES/MFERNANDA.jpeg'],
+    video: '/VIDEOS/FERNANDA.mp4'
   },
   {
     id: 'daniela',
     name: 'Daniela',
     coverImage: '/IMAGES/MDANIELA.jpeg',
-    photos: ['/IMAGES/MDANIELA.jpeg']
+    photos: ['/IMAGES/MDANIELA.jpeg'],
+    video: '/VIDEOS/DANIELA.mp4'
   },
   {
     id: 'mara',
     name: 'Mara',
     coverImage: '/IMAGES/MMARA.jpeg',
-    photos: ['/IMAGES/MMARA.jpeg']
+    photos: ['/IMAGES/MMARA.jpeg'],
+    video: '/VIDEOS/MARA.mp4'
   },
   {
     id: 'tatiana',
     name: 'Tatiana',
     coverImage: '/IMAGES/MTATIANA.jpeg',
-    photos: ['/IMAGES/MTATIANA.jpeg']
-  },
-  {
-    id: 'josefa',
-    name: 'Josefa',
-    coverImage: '/IMAGES/MJOSEFA.jpeg',
-    photos: ['/IMAGES/MJOSEFA.jpeg']
+    photos: ['/IMAGES/MTATIANA.jpeg'],
+    video: '/VIDEOS/TATIANA.mp4'
   }
 ];
 
@@ -137,10 +137,13 @@ export default function TantraProvidencia() {
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[350px] h-[200px] bg-[#8C232B]/20 rounded-full blur-[100px] pointer-events-none z-10"></div>
 
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src={SPA_BACKGROUND_IMAGE}
             alt="Centro de Spa"
-            className="w-full h-full object-cover object-center opacity-30 filter brightness-90 contrast-110 pointer-events-none select-none"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-30 filter brightness-90 contrast-110 pointer-events-none select-none"
             onContextMenu={(e) => e.preventDefault()}
             onDragStart={(e) => e.preventDefault()}
           />
@@ -248,7 +251,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 3. SECCIÓN MASAJISTAS */}
+      {/* 3. SECCIÓN MASAJISTAS (Staff Reducido a 4) */}
       <section id="masajistas" className="py-14 px-4 relative z-20 border-t border-zinc-900/80">
         <div className="max-w-6xl mx-auto text-center">
           <div className="mb-8 space-y-2">
@@ -270,7 +273,7 @@ export default function TantraProvidencia() {
           </div>
 
           {showMasajistas && (
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto transition-all duration-500">
+            <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto transition-all duration-500">
               {MASAJISTAS.map((masajista) => (
                 <div
                   key={masajista.id}
@@ -278,15 +281,22 @@ export default function TantraProvidencia() {
                   className="group relative rounded-3xl overflow-hidden bg-zinc-950 border border-zinc-800/80 hover:border-[#C5A059]/60 transition-all duration-500 cursor-pointer shadow-xl"
                 >
                   <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/60">
-                    <img
+                    <Image
                       src={masajista.coverImage}
                       alt={masajista.name}
-                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-contain object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                       onContextMenu={(e) => e.preventDefault()}
                       onDragStart={(e) => e.preventDefault()}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                     
+                    {/* Marca de Agua en Tarjeta */}
+                    <div className="absolute top-3 right-3 text-[9px] tracking-widest font-mono text-[#C5A059]/60 uppercase bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs pointer-events-none select-none">
+                      Tantra Providencia
+                    </div>
+
                     <div className="absolute bottom-3 left-0 right-0 text-center">
                       <h3 className="text-xl sm:text-2xl font-serif text-[#F3EFE0] group-hover:text-[#D4AF37] transition-colors">
                         {masajista.name}
@@ -313,7 +323,6 @@ export default function TantraProvidencia() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 text-zinc-300 text-sm">
-              {/* Ubicación y Estacionamiento */}
               <div className="space-y-4 bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800/80">
                 <div className="flex items-start gap-3">
                   <span className="text-xl">📍</span>
@@ -332,7 +341,6 @@ export default function TantraProvidencia() {
                 </div>
               </div>
 
-              {/* Políticas de Reserva */}
               <div className="space-y-4 bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800/80">
                 <div className="flex items-start gap-3">
                   <span className="text-xl">💳</span>
@@ -370,7 +378,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* MODAL FOTOS MASAJISTAS */}
+      {/* MODAL / PERFIL (FOTOS Y VIDEO PROTEGIDO) */}
       {selectedMasajista && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
           <div className="relative w-full max-w-3xl max-h-[90vh] bg-zinc-900 border border-[#C5A059]/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
@@ -379,27 +387,61 @@ export default function TantraProvidencia() {
               <h3 className="text-2xl font-serif text-[#F3EFE0]">{selectedMasajista.name}</h3>
               <button
                 onClick={() => setSelectedMasajista(null)}
-                className="w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white flex items-center justify-center text-lg transition-colors"
+                className="w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white flex items-center justify-center text-lg transition-colors cursor-pointer"
                 aria-label="Cerrar modal"
               >
                 ✕
               </button>
             </div>
 
-            <div className="p-4 sm:p-6 overflow-y-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {selectedMasajista.photos.map((photo, idx) => (
-                  <div key={idx} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-zinc-800 bg-black">
-                    <img
-                      src={photo}
-                      alt={`Foto ${idx + 1} de ${selectedMasajista.name}`}
-                      className="w-full h-full object-contain pointer-events-none select-none"
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-6">
+              
+              {/* Sección de Video Protegido */}
+              {selectedMasajista.video && (
+                <div className="space-y-2">
+                  <h4 className="text-xs uppercase tracking-widest text-[#C5A059] font-medium">Video de Presentación</h4>
+                  <div className="relative aspect-[9/16] sm:aspect-video w-full max-w-md mx-auto rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-inner">
+                    <video
+                      src={selectedMasajista.video}
+                      controls
+                      controlsList="nodownload"
+                      disablePictureInPicture
+                      playsInline
+                      className="w-full h-full object-contain pointer-events-auto"
                       onContextMenu={(e) => e.preventDefault()}
-                      onDragStart={(e) => e.preventDefault()}
                     />
+                    {/* Marca de Agua flotante sobre video */}
+                    <div className="absolute top-4 right-4 pointer-events-none select-none text-[10px] sm:text-xs tracking-widest font-mono text-[#F3EFE0]/50 bg-black/40 px-3 py-1 rounded-md backdrop-blur-md border border-white/10 uppercase">
+                      Tantra Providencia
+                    </div>
                   </div>
-                ))}
+                </div>
+              )}
+
+              {/* Galería de Fotografías */}
+              <div className="space-y-2">
+                <h4 className="text-xs uppercase tracking-widest text-[#C5A059] font-medium">Fotografías</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {selectedMasajista.photos.map((photo, idx) => (
+                    <div key={idx} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-zinc-800 bg-black">
+                      <Image
+                        src={photo}
+                        alt={`Foto ${idx + 1} de ${selectedMasajista.name}`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                        className="object-contain pointer-events-none select-none"
+                        onContextMenu={(e) => e.preventDefault()}
+                        onDragStart={(e) => e.preventDefault()}
+                      />
+                      {/* Marca de agua sobre fotografías */}
+                      <div className="absolute bottom-2 right-2 pointer-events-none select-none text-[9px] tracking-widest font-mono text-[#F3EFE0]/40 bg-black/40 px-2 py-0.5 rounded uppercase">
+                        Tantra Providencia
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+
             </div>
 
             <div className="p-4 border-t border-zinc-800 bg-zinc-950/80 flex justify-end">

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
 interface Masajista {
@@ -8,8 +8,10 @@ interface Masajista {
   name: string;
   coverImage: string;
   photos: string[];
-  video: string;
 }
+
+const BASE_WHATSAPP_URL = 'https://wa.me/56944127664?text=';
+const INSTAGRAM_URL = 'https://www.instagram.com/massage_fernanda';
 
 const PLANES = [
   {
@@ -19,7 +21,8 @@ const PLANES = [
     time: '50 min',
     popular: false,
     tag: 'Bienestar Integral',
-    contenido: 'Desconexión total para liberar la tensión acumulada en espalda, brazos y piernas. Utiliza técnicas fluidas que disminuyen el estrés y restauran tu vitalidad.'
+    contenido:
+      'Desconexión total para liberar la tensión acumulada en espalda, brazos y piernas. Utiliza técnicas fluidas que disminuyen el estrés y restauran tu vitalidad.',
   },
   {
     id: 'sens-basico',
@@ -28,7 +31,8 @@ const PLANES = [
     time: '50 min',
     popular: false,
     tag: 'Experiencia Recomendada',
-    contenido: 'Comienza con un masaje profesional en la zona posterior (espalda, brazos y piernas) y finaliza con una experiencia sensorial manual. (masajista con uniforme)'
+    contenido:
+      'Comienza con un masaje profesional en la zona posterior (espalda, brazos y piernas) y finaliza con una experiencia sensorial manual. (masajista con uniforme)',
   },
   {
     id: 'sens-avanzado',
@@ -37,7 +41,8 @@ const PLANES = [
     time: '50 min',
     popular: true,
     tag: 'MÁS SOLICITADO',
-    contenido: 'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)'
+    contenido:
+      'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)',
   },
   {
     id: 'masaje-full',
@@ -46,8 +51,8 @@ const PLANES = [
     time: '50 min',
     popular: false,
     tag: 'Exclusivo',
-    contenido: '(Información de este servicio solo de manera presencial)'
-  }
+    contenido: '(Información de este servicio solo de manera presencial)',
+  },
 ];
 
 const MASAJISTAS: Masajista[] = [
@@ -56,36 +61,34 @@ const MASAJISTAS: Masajista[] = [
     name: 'Fernanda',
     coverImage: '/IMAGES/MFERNANDA.jpeg',
     photos: ['/IMAGES/MFERNANDA.jpeg'],
-    video: '/VIDEOS/FERNANDA.mp4'
   },
   {
     id: 'daniela',
     name: 'Daniela',
-    coverImage: '/IMAGES/MDANIELA.jpeg',
-    photos: ['/IMAGES/MDANIELA.jpeg'],
-    video: '/VIDEOS/DANIELA.mp4'
+    coverImage: '/IMAGES/DANI.jpeg',
+    photos: ['/IMAGES/DANI.jpeg'],
   },
   {
     id: 'mara',
     name: 'Mara',
     coverImage: '/IMAGES/MMARA.jpeg',
     photos: ['/IMAGES/MMARA.jpeg'],
-    video: '/VIDEOS/MARA.mp4'
   },
   {
     id: 'tatiana',
     name: 'Tatiana',
-    coverImage: '/IMAGES/MTATIANA.jpeg',
-    photos: ['/IMAGES/MTATIANA.jpeg'],
-    video: '/VIDEOS/TATIANA.mp4'
-  }
+    coverImage: '/IMAGES/TATI.jpeg',
+    photos: ['/IMAGES/TATI.jpeg'],
+  },
+  {
+    id: 'nikki',
+    name: 'Nikki',
+    coverImage: '/IMAGES/NIKKI.jpeg',
+    photos: ['/IMAGES/NIKKI.jpeg'],
+  },
 ];
 
-const BASE_WHATSAPP_URL = "https://wa.me/56944127664?text=";
-const INSTAGRAM_URL = "https://www.instagram.com/massage_fernanda";
-
-// Logo Oficial de Instagram (SVG)
-const InstagramIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
+const InstagramIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
@@ -96,35 +99,19 @@ const InstagramIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 );
 
-// Logo Oficial de WhatsApp (SVG)
-const WhatsAppIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
+const WhatsAppIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
   </svg>
 );
 
 export default function TantraProvidencia() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
-    // Bloqueo de Clic Derecho
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
-
-    // Bloqueo de Arrastre
     const handleDragStart = (e: DragEvent) => e.preventDefault();
 
-    // Bloqueo de Zoom táctil y por rueda
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 1) e.preventDefault();
-    };
-
-    const handleGestureStart = (e: Event) => e.preventDefault();
-
-    const handleWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || e.metaKey) e.preventDefault();
-    };
-
-    // Bloqueo de Atajos de Teclado
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
         (e.ctrlKey || e.metaKey) &&
@@ -139,26 +126,17 @@ export default function TantraProvidencia() {
 
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('dragstart', handleDragStart);
-    document.addEventListener('touchstart', handleTouchMove, { passive: false });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('gesturestart', handleGestureStart, { passive: false });
-    document.addEventListener('wheel', handleWheel, { passive: false });
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('dragstart', handleDragStart);
-      document.removeEventListener('touchstart', handleTouchMove);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('gesturestart', handleGestureStart);
-      document.removeEventListener('wheel', handleWheel);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
   return (
     <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-transparent selection:text-inherit overflow-x-hidden relative select-none touch-manipulation">
-      
       {/* Botón flotante de Instagram */}
       <a
         href={INSTAGRAM_URL}
@@ -177,7 +155,7 @@ export default function TantraProvidencia() {
 
       {/* Botón flotante de WhatsApp */}
       <a
-        href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría recibir información para agendar un servicio.")}`}
+        href={`${BASE_WHATSAPP_URL}${encodeURIComponent('Hola, me gustaría recibir información para agendar un servicio.')}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
@@ -191,7 +169,7 @@ export default function TantraProvidencia() {
         </span>
       </a>
 
-      {/* 1. HERO SECTION DINÁMICO */}
+      {/* 1. HERO SECTION */}
       <section className="relative min-h-[92vh] flex items-center justify-center px-4 py-20 overflow-hidden">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C5A059]/15 rounded-full blur-[150px] pointer-events-none z-10"></div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[400px] h-[250px] bg-[#8C232B]/20 rounded-full blur-[120px] pointer-events-none z-10"></div>
@@ -225,7 +203,7 @@ export default function TantraProvidencia() {
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto px-4">
             <a
-              href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, me gustaría agendar una hora en Massage Providencia.")}`}
+              href={`${BASE_WHATSAPP_URL}${encodeURIComponent('Hola, me gustaría agendar una hora en Massage Providencia.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto min-w-[210px] bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold px-8 py-4 rounded-2xl shadow-[0_4px_35px_rgba(197,160,89,0.4)] transition-all duration-300 hover:scale-[1.03] active:scale-95 text-center text-xs sm:text-sm uppercase tracking-widest"
@@ -245,7 +223,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* BANNER INSTAGRAM CON TANTRA2 */}
+      {/* BANNER INSTAGRAM */}
       <section className="py-12 px-4 relative z-20 bg-zinc-950 border-y border-zinc-900">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
           <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
@@ -314,7 +292,7 @@ export default function TantraProvidencia() {
                       {plan.time}
                     </span>
                   </div>
-                  
+
                   <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-6 font-light">
                     {plan.contenido}
                   </p>
@@ -348,7 +326,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 3. GALERÍA CON FOTO Y VIDEO POR NOMBRE */}
+      {/* 3. GALERÍA & MASAJISTAS */}
       <section id="masajistas" className="py-16 px-4 relative z-20 border-t border-zinc-900/80">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 space-y-2">
@@ -357,47 +335,28 @@ export default function TantraProvidencia() {
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {MASAJISTAS.map((masajista) => (
               <div
                 key={masajista.id}
-                className="bg-zinc-900/80 border border-zinc-800 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6"
+                className="bg-zinc-900/80 border border-zinc-800 rounded-3xl p-5 shadow-2xl flex flex-col justify-between space-y-4"
               >
-                <div className="flex items-center justify-between border-b border-zinc-800/80 pb-4">
-                  <h3 className="text-2xl font-serif text-[#F3EFE0] tracking-wide">{masajista.name}</h3>
-                  <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase bg-black/50 px-3 py-1 rounded-full border border-[#C5A059]/30">
+                <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+                  <h3 className="text-xl font-serif text-[#F3EFE0] tracking-wide">{masajista.name}</h3>
+                  <span className="text-[9px] font-mono tracking-widest text-[#D4AF37] uppercase bg-black/50 px-2.5 py-1 rounded-full border border-[#C5A059]/30">
                     Disponible
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {/* Fotografía Protegida */}
-                  <div className="space-y-2">
-                    <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-medium block text-center">Fotografía</span>
-                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-inner">
-                      <Image
-                        src={masajista.coverImage}
-                        alt={masajista.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                        className="object-contain pointer-events-none select-none"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Video de Presentación Protegido */}
-                  <div className="space-y-2">
-                    <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-medium block text-center">Video Presentación</span>
-                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-inner">
-                      <video
-                        src={masajista.video}
-                        controls
-                        controlsList="nodownload"
-                        disablePictureInPicture
-                        playsInline
-                        className="w-full h-full object-cover pointer-events-auto"
-                      />
-                    </div>
+                <div className="space-y-2">
+                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-inner">
+                    <Image
+                      src={masajista.coverImage}
+                      alt={masajista.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                      className="object-cover pointer-events-none select-none"
+                    />
                   </div>
                 </div>
 
@@ -405,10 +364,10 @@ export default function TantraProvidencia() {
                   href={`${BASE_WHATSAPP_URL}${encodeURIComponent(`Hola, me gustaría agendar una hora con ${masajista.name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase tracking-widest text-center flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold py-3 px-3 rounded-xl shadow-md transition-all text-[11px] uppercase tracking-widest text-center flex items-center justify-center gap-2"
                 >
                   <WhatsAppIcon className="w-4 h-4" />
-                  <span>Agendar con {masajista.name}</span>
+                  <span>Agendar</span>
                 </a>
               </div>
             ))}
@@ -416,7 +375,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 4. INFORMACIÓN DE UBICACIÓN Y POLÍTICAS DE RESERVA */}
+      {/* 4. INFORMACIÓN DE UBICACIÓN Y POLÍTICAS */}
       <section id="informacion" className="py-16 px-4 relative z-20 border-t border-zinc-900/80">
         <div className="max-w-4xl mx-auto">
           <div className="bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-[#C5A059]/40 rounded-3xl p-8 sm:p-12 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl relative overflow-hidden">
@@ -471,7 +430,7 @@ export default function TantraProvidencia() {
 
             <div className="mt-8 text-center">
               <a
-                href={`${BASE_WHATSAPP_URL}${encodeURIComponent("Hola, leí las políticas y me gustaría consultar disponibilidad para agendar.")}`}
+                href={`${BASE_WHATSAPP_URL}${encodeURIComponent('Hola, leí las políticas y me gustaría consultar disponibilidad para agendar.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black font-semibold px-8 py-3.5 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 text-xs uppercase tracking-widest"

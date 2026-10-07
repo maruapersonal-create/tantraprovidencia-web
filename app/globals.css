@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #070708;
+  --foreground: #E2E2E6;
 }
 
 @theme inline {
@@ -14,16 +14,37 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #070708;
+    --foreground: #E2E2E6;
   }
 }
 
+/* 1. REGISTRO DE PROTECCIÓN Y ESTILOS BASE */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  
+  /* Bloqueo estricto de selección de texto y llamadas contextuales */
+  -webkit-touch-callout: none !important; /* Deshabilita el menú al mantener presionado en iOS */
+  -webkit-user-select: none !important;   /* Safari */
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;      /* Firefox */
+  -ms-user-select: none !important;       /* IE/Edge */
+  user-select: none !important;           /* Deshabilita selección global de texto */
+  
+  /* Deshabilita zoom por gestos multitáctiles en móviles */
+  touch-action: pan-x pan-y;
 }
+
+/* 2. PROTECCIÓN REFORZADA PARA IMÁGENES */
+img {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  pointer-events: none !important;
+}
+
+/* 3. RESPONSIVE ADAPTABILITY */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem !important;

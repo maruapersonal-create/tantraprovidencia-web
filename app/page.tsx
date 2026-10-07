@@ -109,29 +109,53 @@ export default function TantraProvidencia() {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
+    // Bloquear menú contextual (click derecho) y copiado de contenido
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
     const handleDragStart = (e: DragEvent) => e.preventDefault();
+    const handleCopy = (e: ClipboardEvent) => e.preventDefault();
 
+    // Bloquear atajos de teclado (Inspeccionar, Guardar, Imprimir, Copiar y Zoom)
     const handleKeyDown = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
       if (
         (e.ctrlKey || e.metaKey) &&
-        ['s', 'p', 'u', 'c', '+', '-', '0'].includes(e.key.toLowerCase())
+        ['s', 'p', 'u', 'c', 'x', 'a', '+', '-', '0', '='].includes(key)
       ) {
         e.preventDefault();
       }
-      if (e.key === 'PrintScreen') {
+      if (e.key === 'F12' || e.key === 'PrintScreen') {
         e.preventDefault();
       }
     };
 
+    // Bloquear zoom mediante la rueda del ratón (Ctrl + Scroll)
+    const handleWheel = (e: WheelEvent) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+      }
+    };
+
+    // Bloquear gestos de pellizco para zoom en pantallas táctiles y iOS/Safari
+    const handleGesture = (e: Event) => e.preventDefault();
+
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('dragstart', handleDragStart);
+    document.addEventListener('copy', handleCopy);
     document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('gesturestart', handleGesture);
+    document.addEventListener('gesturechange', handleGesture);
+    document.addEventListener('gestureend', handleGesture);
 
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('dragstart', handleDragStart);
+      document.removeEventListener('copy', handleCopy);
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('gesturestart', handleGesture);
+      document.removeEventListener('gesturechange', handleGesture);
+      document.removeEventListener('gestureend', handleGesture);
     };
   }, []);
 
@@ -219,41 +243,6 @@ export default function TantraProvidencia() {
               <InstagramIcon className="w-4 h-4 text-[#D4AF37]" />
               <span>Instagram</span>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* BANNER INSTAGRAM */}
-      <section className="py-12 px-4 relative z-20 bg-zinc-950 border-y border-zinc-900">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-          <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-            <Image
-              src="/IMAGES/TANTRA2.jpeg"
-              alt="Instalaciones Massage Providencia"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-center pointer-events-none select-none hover:scale-105 transition-transform duration-700"
-            />
-          </div>
-
-          <div className="space-y-6 text-center md:text-left">
-            <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Síguenos en Redes</span>
-            <h2 className="text-3xl sm:text-4xl font-serif text-[#F3EFE0]">Conoce más de nuestro trabajo en Instagram</h2>
-            <p className="text-zinc-400 text-sm font-light leading-relaxed">
-              Publicamos contenidos exclusivos, promociones e información detallada de nuestras instalaciones y masajistas disponibles.
-            </p>
-            <div>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] hover:brightness-110 text-white font-medium px-7 py-3.5 rounded-xl shadow-lg transition-all duration-300 text-xs uppercase tracking-widest"
-              >
-                <InstagramIcon className="w-4 h-4" />
-                <span>Ver Perfil @massage_fernanda</span>
-                <span className="text-sm">→</span>
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -437,6 +426,41 @@ export default function TantraProvidencia() {
               >
                 <WhatsAppIcon className="w-4 h-4" />
                 <span>Entendido, Agendar Reserva</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. BANNER INSTAGRAM (AL FINAL DE TODO) */}
+      <section className="py-12 px-4 relative z-20 bg-zinc-950 border-t border-zinc-900">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+            <Image
+              src="/IMAGES/TANTRA2.jpeg"
+              alt="Instalaciones Massage Providencia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center pointer-events-none select-none hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+
+          <div className="space-y-6 text-center md:text-left">
+            <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Síguenos en Redes</span>
+            <h2 className="text-3xl sm:text-4xl font-serif text-[#F3EFE0]">Conoce más de nuestro trabajo en Instagram</h2>
+            <p className="text-zinc-400 text-sm font-light leading-relaxed">
+              Publicamos contenidos exclusivos, promociones e información detallada de nuestras instalaciones y masajistas disponibles.
+            </p>
+            <div>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] hover:brightness-110 text-white font-medium px-7 py-3.5 rounded-xl shadow-lg transition-all duration-300 text-xs uppercase tracking-widest"
+              >
+                <InstagramIcon className="w-4 h-4" />
+                <span>Ver Perfil @massage_fernanda</span>
+                <span className="text-sm">→</span>
               </a>
             </div>
           </div>

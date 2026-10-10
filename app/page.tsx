@@ -15,21 +15,12 @@ const INSTAGRAM_URL = 'https://www.instagram.com/massage_fernanda';
 
 const PLANES = [
   {
-    id: 'relajante',
-    title: 'Relajante o Mixto',
-    priceNeto: 45000,
-    time: '50 min',
-    popular: false,
-    tag: 'Bienestar Integral',
-    contenido:
-      'Desconexión total para liberar la tensión acumulada en espalda, brazos y piernas. Utiliza técnicas fluidas que disminuyen el estrés y restauran tu vitalidad.',
-  },
-  {
     id: 'sens-basico',
     title: 'Sens Básico',
     priceNeto: 50000,
     time: '50 min',
     popular: false,
+    blurContent: false,
     tag: 'Experiencia Recomendada',
     contenido:
       'Comienza con un masaje profesional en la zona posterior (espalda, brazos y piernas) y finaliza con una experiencia sensorial manual. (masajista con uniforme)',
@@ -40,6 +31,7 @@ const PLANES = [
     priceNeto: 65000,
     time: '50 min',
     popular: true,
+    blurContent: false,
     tag: 'MÁS SOLICITADO',
     contenido:
       'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)',
@@ -50,8 +42,9 @@ const PLANES = [
     priceNeto: 100000,
     time: '50 min',
     popular: false,
+    blurContent: true,
     tag: 'Exclusivo',
-    contenido: '(Información de este servicio solo de manera presencial)',
+    contenido: 'Sens Avanzado + Contacto',
   },
 ];
 
@@ -109,17 +102,18 @@ export default function TantraProvidencia() {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
-    // Bloquear menú contextual (click derecho) y copiado de contenido
+    // Bloquear menú contextual (click derecho), arrastre y copiado de contenido
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
     const handleDragStart = (e: DragEvent) => e.preventDefault();
     const handleCopy = (e: ClipboardEvent) => e.preventDefault();
+    const handleSelectStart = (e: Event) => e.preventDefault();
 
-    // Bloquear atajos de teclado (Inspeccionar, Guardar, Imprimir, Copiar y Zoom)
+    // Bloquear atajos de teclado (Inspeccionar, Guardar, Imprimir, Copiar, Capturas y Zoom)
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (
         (e.ctrlKey || e.metaKey) &&
-        ['s', 'p', 'u', 'c', 'x', 'a', '+', '-', '0', '='].includes(key)
+        ['s', 'p', 'u', 'c', 'x', 'a', 'i', 'j', 'k', '+', '-', '0', '='].includes(key)
       ) {
         e.preventDefault();
       }
@@ -135,14 +129,32 @@ export default function TantraProvidencia() {
       }
     };
 
-    // Bloquear gestos de pellizco para zoom en pantallas táctiles y iOS/Safari
+    // Bloquear gestos de pellizco y doble toque para zoom en pantallas táctiles y iOS/Safari
     const handleGesture = (e: Event) => e.preventDefault();
+    
+    let lastTouchEnd = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        e.preventDefault(); // Bloquea zoom multitáctil
+      }
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      const now = new Date().getTime();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault(); // Bloquea doble toque para hacer zoom
+      }
+      lastTouchEnd = now;
+    };
 
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('dragstart', handleDragStart);
     document.addEventListener('copy', handleCopy);
+    document.addEventListener('selectstart', handleSelectStart);
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd, { passive: false });
     document.addEventListener('gesturestart', handleGesture);
     document.addEventListener('gesturechange', handleGesture);
     document.addEventListener('gestureend', handleGesture);
@@ -151,8 +163,11 @@ export default function TantraProvidencia() {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('dragstart', handleDragStart);
       document.removeEventListener('copy', handleCopy);
+      document.removeEventListener('selectstart', handleSelectStart);
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('gesturestart', handleGesture);
       document.removeEventListener('gesturechange', handleGesture);
       document.removeEventListener('gestureend', handleGesture);
@@ -160,7 +175,7 @@ export default function TantraProvidencia() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-transparent selection:text-inherit overflow-x-hidden relative select-none touch-manipulation">
+    <div className="min-h-screen bg-[#070708] text-[#E2E2E6] font-sans selection:bg-transparent selection:text-inherit overflow-x-hidden relative select-none touch-pan-x touch-pan-y">
       {/* Botón flotante de Instagram */}
       <a
         href={INSTAGRAM_URL}
@@ -256,7 +271,7 @@ export default function TantraProvidencia() {
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {PLANES.map((plan) => (
               <div
                 key={plan.id}
@@ -282,7 +297,13 @@ export default function TantraProvidencia() {
                     </span>
                   </div>
 
-                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-6 font-light">
+                  <p
+                    className={`text-zinc-300 text-xs sm:text-sm leading-relaxed mb-6 font-light transition-all ${
+                      plan.blurContent
+                        ? 'blur-[1.5px] opacity-60 select-none'
+                        : ''
+                    }`}
+                  >
                     {plan.contenido}
                   </p>
                 </div>
@@ -338,7 +359,7 @@ export default function TantraProvidencia() {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-inner">
+                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-inner pointer-events-none select-none">
                     <Image
                       src={masajista.coverImage}
                       alt={masajista.name}
@@ -435,7 +456,7 @@ export default function TantraProvidencia() {
       {/* 5. BANNER INSTAGRAM (AL FINAL DE TODO) */}
       <section className="py-12 px-4 relative z-20 bg-zinc-950 border-t border-zinc-900">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-          <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+          <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)] pointer-events-none select-none">
             <Image
               src="/IMAGES/TANTRA2.jpeg"
               alt="Instalaciones Massage Providencia"

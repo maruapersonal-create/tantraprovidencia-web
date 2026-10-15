@@ -13,38 +13,77 @@ interface Masajista {
 const BASE_WHATSAPP_URL = 'https://wa.me/56944127664?text=';
 const INSTAGRAM_URL = 'https://www.instagram.com/massage_fernanda';
 
-const PLANES = [
+// 1. MASAJE EXPRESS (30 MINUTOS)
+const PLANES_EXPRESS = [
   {
-    id: 'sens-basico',
-    title: 'Sens Básico',
-    priceNeto: 50000,
-    time: '50 min',
+    id: 'express-basico',
+    title: 'Express Básico',
+    priceNeto: 35000,
+    time: '30 min',
     popular: false,
     blurContent: false,
-    tag: 'Experiencia Recomendada',
+    tag: 'Rápido & Eficaz',
     contenido:
-      'Comienza con un masaje profesional en la zona posterior (espalda, brazos y piernas) y finaliza con una experiencia sensorial manual. (masajista con uniforme)',
+      'Masaje en una zona (espalda o piernas) + estimulación manual (masajista con ropa).',
   },
   {
-    id: 'sens-avanzado',
-    title: 'Sens Avanzado',
-    priceNeto: 65000,
-    time: '50 min',
+    id: 'express-avanzado',
+    title: 'Express Avanzado',
+    priceNeto: 45000,
+    time: '30 min',
     popular: true,
     blurContent: false,
-    tag: 'MÁS SOLICITADO',
+    tag: 'MÁS SOLICITADO 30 MIN',
     contenido:
-      'Comienza con un masaje profesional en la zona posterior, incorpora técnicas de deslizamiento corporal para una experiencia de relajación profunda y finaliza con experiencia sensorial manual y oral c/c. (ambos desnudos)',
+      'Masaje en una zona (espalda o piernas) + estimulación oral c/c (masajista en lencería).',
   },
   {
-    id: 'masaje-full',
-    title: 'Masaje Full',
-    priceNeto: 100000,
-    time: '50 min',
+    id: 'express-full',
+    title: 'Express Full',
+    priceNeto: 70000,
+    time: '30 min',
     popular: false,
     blurContent: true,
-    tag: 'Exclusivo',
-    contenido: 'Sens Avanzado + Contacto',
+    tag: 'Exclusivo Express',
+    contenido:
+      'Masaje en una zona (espalda o piernas) + contacto.',
+  },
+];
+
+// 2. MASAJE PREMIUM (60 MINUTOS)
+const PLANES_PREMIUM = [
+  {
+    id: 'premium-basico',
+    title: 'Premium Básico',
+    priceNeto: 50000,
+    time: '60 min',
+    popular: false,
+    blurContent: false,
+    tag: 'Relajación Completa',
+    contenido:
+      'Masaje cuerpo completo + estimulación manual (masajista con ropa).',
+  },
+  {
+    id: 'premium-avanzado',
+    title: 'Premium Avanzado',
+    priceNeto: 65000,
+    time: '60 min',
+    popular: true,
+    blurContent: false,
+    tag: 'RECOMENDADO ⭐',
+    contenido:
+      'Masaje cuerpo completo + estimulación oral c/c (masajista en lencería).',
+  },
+  {
+    id: 'premium-full',
+    title: 'Premium Full',
+    priceNeto: 100000,
+    time: '60 min',
+    popular: false,
+    blurContent: true,
+    tag: 'Exclusivo VIP',
+    contenido:
+      'Masaje cuerpo completo + contacto.',
   },
 ];
 
@@ -52,14 +91,14 @@ const MASAJISTAS: Masajista[] = [
   {
     id: 'fernanda',
     name: 'Fernanda',
-    coverImage: '/IMAGES/FERNANDA1.png',
-    photos: ['/IMAGES/FERNANDA1.png'],
+    coverImage: '/IMAGES/OCTUBREFERNANDA11.png',
+    photos: ['/IMAGES/OCTUBREFERNANDA11.png'],
   },
   {
     id: 'daniela',
     name: 'Daniela',
-    coverImage: '/IMAGES/DANI.jpeg',
-    photos: ['/IMAGES/DANI.jpeg'],
+    coverImage: '/IMAGES/OCTUBREDANIELA11.jpeg',
+    photos: ['/IMAGES/OCTUBREDANIELA11.jpeg'],
   },
   {
     id: 'mara',
@@ -108,7 +147,7 @@ export default function TantraProvidencia() {
     const handleCopy = (e: ClipboardEvent) => e.preventDefault();
     const handleSelectStart = (e: Event) => e.preventDefault();
 
-    // Bloquear atajos de teclado (Inspeccionar, Guardar, Imprimir, Copiar, Capturas y Zoom)
+    // Bloquear atajos de teclado
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (
@@ -122,27 +161,27 @@ export default function TantraProvidencia() {
       }
     };
 
-    // Bloquear zoom mediante la rueda del ratón (Ctrl + Scroll)
+    // Bloquear zoom mediante la rueda del ratón
     const handleWheel = (e: WheelEvent) => {
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
       }
     };
 
-    // Bloquear gestos de pellizco y doble toque para zoom en pantallas táctiles y iOS/Safari
+    // Bloquear gestos táctiles de zoom
     const handleGesture = (e: Event) => e.preventDefault();
-    
+
     let lastTouchEnd = 0;
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 1) {
-        e.preventDefault(); // Bloquea zoom multitáctil
+        e.preventDefault();
       }
     };
-    
+
     const handleTouchEnd = (e: TouchEvent) => {
       const now = new Date().getTime();
       if (now - lastTouchEnd <= 300) {
-        e.preventDefault(); // Bloquea doble toque para hacer zoom
+        e.preventDefault();
       }
       lastTouchEnd = now;
     };
@@ -262,77 +301,213 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 2. SERVICIOS Y TARIFAS */}
-      <section id="servicios" className="py-16 px-4 relative z-20 scroll-mt-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 space-y-2">
-            <span className="text-[#C5A059] text-[11px] font-medium tracking-[0.3em] uppercase">Carta de Servicios</span>
-            <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#F3EFE0]">Experiencias & Tarifas</h2>
-            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto mt-3"></div>
+      {/* 2. SECCIÓN DE TARIFAS (DIVIDIDA EN 2 SECCIONES) */}
+      <section id="servicios" className="py-20 px-4 relative z-20 scroll-mt-6">
+        <div className="max-w-6xl mx-auto space-y-20">
+          
+          {/* TÍTULO PRINCIPAL GENERAL */}
+          <div className="text-center space-y-3">
+            <span className="text-[#C5A059] text-xs font-semibold tracking-[0.35em] uppercase">
+              Carta de Servicios
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#F3EFE0] tracking-tight">
+              Planes & Experiencias
+            </h2>
+            <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent mx-auto pt-1"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {PLANES.map((plan) => (
-              <div
-                key={plan.id}
-                className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-500 group backdrop-blur-xl ${
-                  plan.popular
-                    ? 'bg-gradient-to-b from-zinc-900/95 via-zinc-900/80 to-zinc-950 border border-[#C5A059]/80 shadow-[0_10px_40px_rgba(197,160,89,0.2)]'
-                    : 'bg-zinc-900/60 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/80'
-                }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] text-black font-bold text-[10px] uppercase tracking-widest px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
-                    {plan.tag}
-                  </div>
-                )}
-
-                <div>
-                  <div className="flex justify-between items-start mb-4 gap-2 pt-2">
-                    <h3 className="text-xl font-serif text-[#F3EFE0] group-hover:text-[#D4AF37] transition-colors duration-300">
-                      {plan.title}
-                    </h3>
-                    <span className="text-[11px] font-mono text-zinc-300 bg-zinc-800/80 border border-zinc-700/60 px-3 py-1 rounded-full whitespace-nowrap">
-                      {plan.time}
-                    </span>
-                  </div>
-
-                  <p
-                    className={`text-zinc-300 text-xs sm:text-sm leading-relaxed mb-6 font-light transition-all ${
-                      plan.blurContent
-                        ? 'blur-[1.5px] opacity-60 select-none'
-                        : ''
-                    }`}
-                  >
-                    {plan.contenido}
-                  </p>
-                </div>
-
-                <div className="space-y-4 pt-6 border-t border-zinc-800/80">
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">Valor</span>
-                    <span className="text-2xl font-serif text-[#D4AF37] font-bold">
-                      ${plan.priceNeto.toLocaleString('es-CL')}
-                    </span>
-                  </div>
-
-                  <a
-                    href={`${BASE_WHATSAPP_URL}${encodeURIComponent(`Hola, me interesa agendar el servicio ${plan.title} ($${plan.priceNeto.toLocaleString('es-CL')}).`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-medium text-center ${
-                      plan.popular
-                        ? 'bg-gradient-to-r from-[#C5A059] to-[#9E7D3B] hover:brightness-110 text-black shadow-md'
-                        : 'bg-zinc-800/90 hover:bg-zinc-700 text-zinc-100 border border-zinc-700/60'
-                    }`}
-                  >
-                    <WhatsAppIcon className="w-4 h-4" />
-                    <span>Agendar por WhatsApp</span>
-                  </a>
-                </div>
+          {/* ====================================================== */}
+          {/* SECCIÓN 1: MASAJE EXPRESS 30 MINUTOS */}
+          {/* ====================================================== */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent flex-1"></div>
+              <div className="text-center">
+                <h3 className="text-2xl sm:text-3xl font-serif text-[#D4AF37] tracking-wide uppercase">
+                  Masaje Express 30 Minutos
+                </h3>
+                <p className="text-xs text-zinc-400 font-light mt-1">Sesiones breves e intensas en zonas específicas</p>
               </div>
-            ))}
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent flex-1"></div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {PLANES_EXPRESS.map((plan) => {
+                const whatsappMsg = `Hola, me interesa agendar el servicio ${plan.title} ($${plan.priceNeto.toLocaleString('es-CL')}).`;
+
+                return (
+                  <div
+                    key={plan.id}
+                    className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-500 backdrop-blur-xl ${
+                      plan.popular
+                        ? 'bg-gradient-to-b from-zinc-900/90 via-zinc-900/70 to-zinc-950 border-2 border-[#D4AF37] shadow-[0_0_35px_rgba(212,175,55,0.15)] scale-[1.02]'
+                        : 'bg-zinc-900/40 border border-zinc-800/80 hover:border-zinc-700/80 hover:bg-zinc-900/60'
+                    }`}
+                  >
+                    {plan.tag && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-lg whitespace-nowrap block ${
+                            plan.popular
+                              ? 'bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] text-black'
+                              : 'bg-zinc-800/90 text-zinc-300 border border-zinc-700'
+                          }`}
+                        >
+                          {plan.tag}
+                        </span>
+                      </div>
+                    )}
+
+                    <div>
+                      <div className="flex justify-between items-center mb-6 pt-2">
+                        <h4 className="text-2xl font-serif text-[#F3EFE0] tracking-wide">
+                          {plan.title}
+                        </h4>
+                        <span className="text-xs font-mono text-zinc-300 bg-zinc-800/90 border border-zinc-700/60 px-3 py-1 rounded-full whitespace-nowrap">
+                          ⏱️ {plan.time}
+                        </span>
+                      </div>
+
+                      <p
+                        className={`text-zinc-300 text-xs sm:text-sm leading-relaxed mb-8 font-light ${
+                          plan.blurContent ? 'blur-[1.5px] opacity-60 select-none' : ''
+                        }`}
+                      >
+                        {plan.contenido}
+                      </p>
+                    </div>
+
+                    <div className="space-y-5 pt-6 border-t border-zinc-800/80">
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-xs font-medium text-zinc-400 uppercase tracking-widest">
+                          Valor
+                        </span>
+                        <div className="text-right">
+                          <span className="text-2xl sm:text-3xl font-serif text-[#D4AF37] font-bold">
+                            ${plan.priceNeto.toLocaleString('es-CL')}
+                          </span>
+                          <span className="block text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
+                            CLP Neto
+                          </span>
+                        </div>
+                      </div>
+
+                      <a
+                        href={`${BASE_WHATSAPP_URL}${encodeURIComponent(whatsappMsg)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-semibold text-center ${
+                          plan.popular
+                            ? 'bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black shadow-lg hover:scale-[1.02] active:scale-95'
+                            : 'bg-zinc-800/90 hover:bg-zinc-700/90 text-zinc-100 border border-zinc-700/60 hover:scale-[1.02] active:scale-95'
+                        }`}
+                      >
+                        <WhatsAppIcon className="w-4 h-4" />
+                        <span>Agendar 30 Min</span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
+
+          {/* ====================================================== */}
+          {/* SECCIÓN 2: MASAJE PREMIUM 60 MINUTOS */}
+          {/* ====================================================== */}
+          <div className="space-y-8 pt-6">
+            <div className="flex items-center gap-4">
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent flex-1"></div>
+              <div className="text-center">
+                <h3 className="text-2xl sm:text-3xl font-serif text-[#D4AF37] tracking-wide uppercase">
+                  Masaje Premium 60 Minutos
+                </h3>
+                <p className="text-xs text-zinc-400 font-light mt-1">Experiencia completa cuerpo entero para una desconexión total</p>
+              </div>
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent flex-1"></div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {PLANES_PREMIUM.map((plan) => {
+                const whatsappMsg = `Hola, me interesa agendar el servicio ${plan.title} ($${plan.priceNeto.toLocaleString('es-CL')}).`;
+
+                return (
+                  <div
+                    key={plan.id}
+                    className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-500 backdrop-blur-xl ${
+                      plan.popular
+                        ? 'bg-gradient-to-b from-zinc-900/90 via-zinc-900/70 to-zinc-950 border-2 border-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.15)] scale-[1.02]'
+                        : 'bg-zinc-900/40 border border-zinc-800/80 hover:border-zinc-700/80 hover:bg-zinc-900/60'
+                    }`}
+                  >
+                    {plan.tag && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-lg whitespace-nowrap block ${
+                            plan.popular
+                              ? 'bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] text-black'
+                              : 'bg-zinc-800/90 text-zinc-300 border border-zinc-700'
+                          }`}
+                        >
+                          {plan.tag}
+                        </span>
+                      </div>
+                    )}
+
+                    <div>
+                      <div className="flex justify-between items-center mb-6 pt-2">
+                        <h4 className="text-2xl font-serif text-[#F3EFE0] tracking-wide">
+                          {plan.title}
+                        </h4>
+                        <span className="text-xs font-mono text-zinc-300 bg-zinc-800/90 border border-zinc-700/60 px-3 py-1 rounded-full whitespace-nowrap">
+                          ⏱️ {plan.time}
+                        </span>
+                      </div>
+
+                      <p
+                        className={`text-zinc-300 text-xs sm:text-sm leading-relaxed mb-8 font-light ${
+                          plan.blurContent ? 'blur-[1.5px] opacity-60 select-none' : ''
+                        }`}
+                      >
+                        {plan.contenido}
+                      </p>
+                    </div>
+
+                    <div className="space-y-5 pt-6 border-t border-zinc-800/80">
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-xs font-medium text-zinc-400 uppercase tracking-widest">
+                          Valor
+                        </span>
+                        <div className="text-right">
+                          <span className="text-2xl sm:text-3xl font-serif text-[#D4AF37] font-bold">
+                            ${plan.priceNeto.toLocaleString('es-CL')}
+                          </span>
+                          <span className="block text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
+                            CLP Neto
+                          </span>
+                        </div>
+                      </div>
+
+                      <a
+                        href={`${BASE_WHATSAPP_URL}${encodeURIComponent(whatsappMsg)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-full inline-flex items-center justify-center gap-2 py-4 px-4 rounded-xl transition-all duration-300 text-xs uppercase tracking-widest font-semibold text-center ${
+                          plan.popular
+                            ? 'bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#9E7D3B] hover:brightness-110 text-black shadow-lg shadow-[#D4AF37]/20 hover:scale-[1.02] active:scale-95'
+                            : 'bg-zinc-800/90 hover:bg-zinc-700/90 text-zinc-100 border border-zinc-700/60 hover:scale-[1.02] active:scale-95'
+                        }`}
+                      >
+                        <WhatsAppIcon className="w-4 h-4" />
+                        <span>Agendar 60 Min</span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
       </section>
 

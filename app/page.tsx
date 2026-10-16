@@ -85,8 +85,8 @@ const MASAJISTAS: Masajista[] = [
   {
     id: 'fernanda',
     name: 'Fernanda',
-    coverImage: '/IMAGES/OCTUBREFERNANDA11.jpeg',
-    photos: ['/IMAGES/OCTUBREFERNANDA11.jpeg'],
+    coverImage: '/IMAGES/FERSH111.jpeg',
+    photos: ['/IMAGES/FERSH111.jpeg'],
   },
   {
     id: 'daniela',

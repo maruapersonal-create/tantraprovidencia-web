@@ -77,7 +77,7 @@ const PLANES_PREMIUM = [
     popular: false,
     tag: 'Exclusivo VIP',
     contenido:
-      'Masaje profesional en cuerpo completo + exquisito y placentero piel a piel incluye contacto. (servicio vip)',
+      'Masaje profesional en cuerpo completo+ exquisito y placentero piel a piel incluye contacto. (servicio vip)',
   },
 ];
 
@@ -119,7 +119,7 @@ const InstagramIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
     <path
       fillRule="evenodd"
       clipRule="evenodd"
-      d="M12 2C9.284 2 8.944 2.012 7.877 2.06 6.812 2.108 6.086 2.278 5.45 2.525A5.143 5.143 0 003.586 3.586C2.937 4.235 2.525 4.962 2.278 5.998C2.012 7.064 2 7.404 2 10.12V13.88C2 16.596 2.012 16.936 2.06 18.003C2.108 19.068 2.278 19.794 2.525 20.43C2.772 23.091 5.209 23.503 6.245 23.75C7.311 24.016 7.651 24.028 10.367 24.028H14.127C16.843 24.028 17.183 24.016 18.25 23.968C19.315 23.92 20.041 23.75 20.677 23.503A5.143 5.143 0 0022.541 22.442C23.19 21.793 23.602 21.066 23.849 20.03C24.115 18.964 24.127 18.624 24.067 8.025C24.019 6.96 23.849 6.234 23.602 5.598C23.355 4.962 22.943 4.235 22.294 3.586A5.143 5.143 0 0020.43 2.525C19.394 2.278 18.668 2.108 17.602 2.06C16.535 2.012 16.195 2 13.479 2H12zm0 1.983c2.67 0 2.987.01 4.042.058 1.002.046 1.546.213 1.908.354.48.186.822.408 1.182.768.36.36.582.702.768 1.182.141.362.308.906.354 1.908.048 1.055.058 1.372.058 4.042v3.382c0 2.67-.01 2.987-.058 4.042-.046 1.002-.213 1.546-.354 1.908a3.16 3.16 0 01-.768 1.182 3.16 3.16 0 01-1.182.768c-.362.141-.906.308-1.908.354-1.055.048-1.372.058-4.042.058h-3.382c-2.67 0-2.987-.01-4.042-.058-1.002-.046-1.546-.213-1.908-.354a3.16 3.16 0 01-1.182-.768 3.16 3.16 0 01-.768-1.182c-.141-.362-.308-.906-.354-1.908-.048-1.055-.058-1.372-.058-4.042V9.891c0-2.67.01-2.987.058-4.042.046-1.002.213-1.546.354-1.908a3.16 3.16 0 01.768-1.182 3.16 3.16 0 011.182-.768c.362-.141.906-.308 1.908-.354 1.055-.048 1.372-.058 4.042-.058H12zm0 3.392a5.96 5.96 0 100 11.92 5.96 5.96 0 000-11.92zm0 1.983a3.977 3.977 0 110 7.954 3.977 3.977 0 010-7.954zm6.406-3.845a1.392 1.392 0 100 2.784 1.392 1.392 0 000-2.784z"
+      d="M12 2C9.284 2 8.944 2.012 7.877 2.06 6.812 2.108 6.086 2.278 5.45 2.525A5.143 5.143 0 003.586 3.586C2.937 4.235 2.525 4.962 2.278 5.998C2.012 7.064 2 7.404 2 10.12V13.88C2 16.596 2.012 16.936 2.06 18.003C2.108 19.068 2.278 19.794 2.525 20.43C2.772 21.066 3.184 21.793 3.833 22.442C4.482 23.091 5.209 23.503 6.245 23.75C7.311 24.016 7.651 24.028 10.367 24.028H14.127C16.843 24.028 17.183 24.016 18.25 23.968C19.315 23.92 20.041 23.75 20.677 23.503A5.143 5.143 0 0022.541 22.442C23.19 21.793 23.602 21.066 23.849 20.03C24.115 18.964 24.127 18.624 24.067 8.025C24.019 6.96 23.849 6.234 23.602 5.598C23.355 4.962 22.943 4.235 22.294 3.586A5.143 5.143 0 0020.43 2.525C19.394 2.278 18.668 2.108 17.602 2.06C16.535 2.012 16.195 2 13.479 2H12zm0 1.983c2.67 0 2.987.01 4.042.058 1.002.046 1.546.213 1.908.354.48.186.822.408 1.182.768.36.36.582.702.768 1.182.141.362.308.906.354 1.908.048 1.055.058 1.372.058 4.042v3.382c0 2.67-.01 2.987-.058 4.042-.046 1.002-.213 1.546-.354 1.908a3.16 3.16 0 01-.768 1.182 3.16 3.16 0 01-1.182.768c-.362.141-.906.308-1.908.354-1.055.048-1.372.058-4.042.058h-3.382c-2.67 0-2.987-.01-4.042-.058-1.002-.046-1.546-.213-1.908-.354a3.16 3.16 0 01-1.182-.768 3.16 3.16 0 01-.768-1.182c-.141-.362-.308-.906-.354-1.908-.048-1.055-.058-1.372-.058-4.042V9.891c0-2.67.01-2.987.058-4.042.046-1.002.213-1.546.354-1.908a3.16 3.16 0 01.768-1.182 3.16 3.16 0 011.182-.768c.362-.141.906-.308 1.908-.354 1.055-.048 1.372-.058 4.042-.058H12zm0 3.392a5.96 5.96 0 100 11.92 5.96 5.96 0 000-11.92zm0 1.983a3.977 3.977 0 110 7.954 3.977 3.977 0 010-7.954zm6.406-3.845a1.392 1.392 0 100 2.784 1.392 1.392 0 000-2.784z"
       fill="currentColor"
     />
   </svg>
@@ -315,8 +315,8 @@ export default function TantraProvidencia() {
                 <h3 className="text-2xl sm:text-3xl font-serif text-[#D4AF37] tracking-wide uppercase">
                   Masaje Express 30 Minutos
                 </h3>
-                <p className="text-xs text-zinc-400 font-light mt-1">
-                  (Dentro de este tiempo está contemplado ducha, servicio, pago, etc.)
+                <p className="text-xs text-[#D4AF37] font-medium mt-1">
+                  (dentro de este tiempo esta contemplado ducha, servicio, pago, etc)
                 </p>
               </div>
               <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent flex-1"></div>
@@ -407,8 +407,8 @@ export default function TantraProvidencia() {
                 <h3 className="text-2xl sm:text-3xl font-serif text-[#D4AF37] tracking-wide uppercase">
                   Masaje Premium 60 Minutos
                 </h3>
-                <p className="text-xs text-zinc-400 font-light mt-1">
-                  (Dentro de este tiempo está contemplado ducha, servicio, pago, etc.)
+                <p className="text-xs text-[#D4AF37] font-medium mt-1">
+                  (dentro de este tiempo esta contemplado ducha, servicio, pago, etc)
                 </p>
               </div>
               <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent flex-1"></div>
@@ -491,10 +491,10 @@ export default function TantraProvidencia() {
             </div>
           </div>
 
-          {/* NOTA ACLARATORIA ADICIONALES */}
-          <div className="max-w-3xl mx-auto bg-zinc-900/60 border border-[#C5A059]/30 rounded-2xl p-4 sm:p-6 text-center backdrop-blur-md">
-            <p className="text-xs sm:text-sm font-medium tracking-wide text-[#D4AF37] uppercase">
-              ✨ Los servicios adicionales se pagan aparte y se conversan personally con la masajista.
+          {/* NOTA ADICIONALES */}
+          <div className="max-w-3xl mx-auto bg-zinc-900/90 border border-[#C5A059]/50 rounded-2xl p-5 text-center shadow-lg">
+            <p className="text-xs sm:text-sm font-semibold tracking-wide text-[#D4AF37] uppercase">
+              (ADICIONALES SE PAGAN APARTE Y SE CONVERSA PERSONALMENTE CON LA MASAJISTA)
             </p>
           </div>
 
@@ -645,3 +645,4 @@ export default function TantraProvidencia() {
       </footer>
     </div>
   );
+}

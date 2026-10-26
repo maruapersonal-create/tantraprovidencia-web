@@ -6,8 +6,7 @@ import Image from 'next/image';
 interface Masajista {
   id: string;
   name: string;
-  coverImage: string;
-  photos: string[];
+  videoUrl: string;
 }
 
 const BASE_WHATSAPP_URL = 'https://wa.me/56944127664?text=';
@@ -85,32 +84,27 @@ const MASAJISTAS: Masajista[] = [
   {
     id: 'fernanda',
     name: 'Fernanda',
-    coverImage: '/IMAGES/FERSH111.jpeg',
-    photos: ['/IMAGES/FERSH111.jpeg'],
+    videoUrl: '/VIDEOS/FERSHI.mp4',
   },
   {
     id: 'daniela',
     name: 'Daniela',
-    coverImage: '/IMAGES/OCTUBREDANIELA11.jpeg',
-    photos: ['/IMAGES/OCTUBREDANIELA11.jpeg'],
+    videoUrl: '/VIDEOS/YEDANI.mp4',
   },
   {
     id: 'mara',
     name: 'Mara',
-    coverImage: '/IMAGES/MARA2.jpeg',
-    photos: ['/IMAGES/MARA2.jpeg'],
+    videoUrl: '/VIDEOS/MERMARA.mp4',
   },
   {
     id: 'tatiana',
     name: 'Tatiana',
-    coverImage: '/IMAGES/TATIANA3.jpeg',
-    photos: ['/IMAGES/TATIANA3.jpeg'],
+    videoUrl: '/VIDEOS/LTATI.mp4',
   },
   {
     id: 'nikki',
     name: 'Nikki',
-    coverImage: '/IMAGES/NIKKI.jpeg',
-    photos: ['/IMAGES/NIKKI.jpeg'],
+    videoUrl: '/VIDEOS/CNIKKI.mp4',
   },
 ];
 
@@ -119,7 +113,7 @@ const InstagramIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
     <path
       fillRule="evenodd"
       clipRule="evenodd"
-      d="M12 2C9.284 2 8.944 2.012 7.877 2.06 6.812 2.108 6.086 2.278 5.45 2.525A5.143 5.143 0 003.586 3.586C2.937 4.235 2.525 4.962 2.278 5.998C2.012 7.064 2 7.404 2 10.12V13.88C2 16.596 2.012 16.936 2.06 18.003C2.108 19.068 2.278 19.794 2.525 20.43C2.772 21.066 3.184 21.793 3.833 22.442C4.482 23.091 5.209 23.503 6.245 23.75C7.311 24.016 7.651 24.028 10.367 24.028H14.127C16.843 24.028 17.183 24.016 18.25 23.968C19.315 23.92 20.041 23.75 20.677 23.503A5.143 5.143 0 0022.541 22.442C23.19 21.793 23.602 21.066 23.849 20.03C24.115 18.964 24.127 18.624 24.067 8.025C24.019 6.96 23.849 6.234 23.602 5.598C23.355 4.962 22.943 4.235 22.294 3.586A5.143 5.143 0 0020.43 2.525C19.394 2.278 18.668 2.108 17.602 2.06C16.535 2.012 16.195 2 13.479 2H12zm0 1.983c2.67 0 2.987.01 4.042.058 1.002.046 1.546.213 1.908.354.48.186.822.408 1.182.768.36.36.582.702.768 1.182.141.362.308.906.354 1.908.048 1.055.058 1.372.058 4.042v3.382c0 2.67-.01 2.987-.058 4.042-.046 1.002-.213 1.546-.354 1.908a3.16 3.16 0 01-.768 1.182 3.16 3.16 0 01-1.182.768c-.362.141-.906.308-1.908.354-1.055.048-1.372.058-4.042.058h-3.382c-2.67 0-2.987-.01-4.042-.058-1.002-.046-1.546-.213-1.908-.354a3.16 3.16 0 01-1.182-.768 3.16 3.16 0 01-.768-1.182c-.141-.362-.308-.906-.354-1.908-.048-1.055-.058-1.372-.058-4.042V9.891c0-2.67.01-2.987.058-4.042.046-1.002.213-1.546.354-1.908a3.16 3.16 0 01.768-1.182 3.16 3.16 0 011.182-.768c.362-.141.906-.308 1.908-.354 1.055-.048 1.372-.058 4.042-.058H12zm0 3.392a5.96 5.96 0 100 11.92 5.96 5.96 0 000-11.92zm0 1.983a3.977 3.977 0 110 7.954 3.977 3.977 0 010-7.954zm6.406-3.845a1.392 1.392 0 100 2.784 1.392 1.392 0 000-2.784z"
+      d="M12 2C9.284 2 8.944 2.012 7.877 2.06 6.812 2.108 6.086 2.278 5.45 2.525A5.143 5.143 0 003.586 3.586C2.937 4.235 2.525 4.962 2.278 5.998C2.012 7.064 2 7.404 2 10.12V13.88C2 16.596 2.012 16.936 2.06 18.003C2.108 19.068 2.278 19.794 2.525 20.43C2.772 21.066 3.184 21.793 3.833 22.442C4.482 23.091 5.209 23.503 6.245 23.75C7.311 24.016 7.651 24.028 10.367 24.028H14.127C16.843 24.028 17.183 24.016 18.25 23.968C19.315 23.92 20.041 23.75 20.677 23.503A5.143 5.143 0 0022.541 22.442C23.19 21.793 23.602 21.066 23.849 20.03C24.115 18.964 24.127 18.624 24.127 15.908V12.148C24.127 9.432 24.115 9.092 24.067 8.025C24.019 6.96 23.849 6.234 23.602 5.598C23.355 4.962 22.943 4.235 22.294 3.586A5.143 5.143 0 0020.43 2.525C19.394 2.278 18.668 2.108 17.602 2.06C16.535 2.012 16.195 2 13.479 2H12zm0 1.983c2.67 0 2.987.01 4.042.058 1.002.046 1.546.213 1.908.354.48.186.822.408 1.182.768.36.36.582.702.768 1.182.141.362.308.906.354 1.908.048 1.055.058 1.372.058 4.042v3.382c0 2.67-.01 2.987-.058 4.042-.046 1.002-.213 1.546-.354 1.908a3.16 3.16 0 01-.768 1.182 3.16 3.16 0 01-1.182.768c-.362.141-.906.308-1.908.354-1.055.048-1.372.058-4.042.058h-3.382c-2.67 0-2.987-.01-4.042-.058-1.002-.046-1.546-.213-1.908-.354a3.16 3.16 0 01-1.182-.768 3.16 3.16 0 01-.768-1.182c-.141-.362-.308-.906-.354-1.908-.048-1.055-.058-1.372-.058-4.042V9.891c0-2.67.01-2.987.058-4.042.046-1.002.213-1.546.354-1.908a3.16 3.16 0 01.768-1.182 3.16 3.16 0 011.182-.768c.362-.141.906-.308 1.908-.354 1.055-.048 1.372-.058 4.042-.058H12zm0 3.392a5.96 5.96 0 100 11.92 5.96 5.96 0 000-11.92zm0 1.983a3.977 3.977 0 110 7.954 3.977 3.977 0 010-7.954zm6.406-3.845a1.392 1.392 0 100 2.784 1.392 1.392 0 000-2.784z"
       fill="currentColor"
     />
   </svg>
@@ -135,12 +129,16 @@ export default function TantraProvidencia() {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
-    // Bloquear menú contextual, arrastre y copiado
+    // 1. Bloquear menú contextual (clic derecho)
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
+    // 2. Bloquear arrastre de elementos
     const handleDragStart = (e: DragEvent) => e.preventDefault();
+    // 3. Bloquear copiado
     const handleCopy = (e: ClipboardEvent) => e.preventDefault();
+    // 4. Bloquear selección de texto
     const handleSelectStart = (e: Event) => e.preventDefault();
 
+    // 5. Bloquear atajos de teclado para guardar, imprimir, inspeccionar y capturas de pantalla (PrintScreen, F12, Ctrl+S, etc.)
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (
@@ -151,28 +149,31 @@ export default function TantraProvidencia() {
       }
       if (e.key === 'F12' || e.key === 'PrintScreen') {
         e.preventDefault();
+        navigator.clipboard?.writeText?.(''); // Limpiar portapapeles si presiona PrintScreen
       }
     };
 
+    // 6. Bloquear zoom por rueda del mouse con Ctrl
     const handleWheel = (e: WheelEvent) => {
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
       }
     };
 
+    // 7. Bloquear gestos táctiles (zoom por pinch en celulares)
     const handleGesture = (e: Event) => e.preventDefault();
     
     let lastTouchEnd = 0;
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 1) {
-        e.preventDefault();
+        e.preventDefault(); // Bloquear multitáctil / zoom de dos dedos
       }
     };
     
     const handleTouchEnd = (e: TouchEvent) => {
       const now = new Date().getTime();
       if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
+        e.preventDefault(); // Bloquear doble toque para hacer zoom
       }
       lastTouchEnd = now;
     };
@@ -296,7 +297,6 @@ export default function TantraProvidencia() {
       <section id="servicios" className="py-20 px-4 relative z-20 scroll-mt-6">
         <div className="max-w-6xl mx-auto space-y-20">
           
-          {/* TÍTULO PRINCIPAL GENERAL */}
           <div className="text-center space-y-3">
             <span className="text-[#C5A059] text-xs font-semibold tracking-[0.35em] uppercase">
               Carta de Servicios
@@ -501,7 +501,7 @@ export default function TantraProvidencia() {
         </div>
       </section>
 
-      {/* 3. GALERÍA & MASAJISTAS */}
+      {/* 3. GALERÍA & MASAJISTAS (CON VIDEOS SEGUROS CONTRA DESCARGA Y ZOOM) */}
       <section id="masajistas" className="py-16 px-4 relative z-20 border-t border-zinc-900">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 space-y-2">
@@ -524,14 +524,22 @@ export default function TantraProvidencia() {
                 </div>
 
                 <div className="space-y-2">
+                  {/* Contenedor con capa protectora transparente para evitar interacción directa o arrastre del video */}
                   <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-inner pointer-events-none select-none">
-                    <Image
-                      src={masajista.coverImage}
-                      alt={masajista.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                      className="object-cover pointer-events-none select-none"
+                    <video
+                      src={masajista.videoUrl}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controls={false}
+                      disablePictureInPicture
+                      controlsList="nodownload nofullscreen noremoteplayback"
+                      onContextMenu={(e) => e.preventDefault()}
+                      className="w-full h-full object-cover pointer-events-none select-none"
                     />
+                    {/* Capa invisible de bloqueo de seguridad encima del video */}
+                    <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto" onContextMenu={(e) => e.preventDefault()}></div>
                   </div>
                 </div>
 
@@ -622,7 +630,7 @@ export default function TantraProvidencia() {
       <section className="py-12 px-4 relative z-20 bg-zinc-950 border-t border-zinc-900">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-950 p-8 rounded-3xl border border-zinc-800">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-2xl font-serif text-[#F3EFE0]">Síguenos en Instagram</h3>
+            <h3 className="text-2xl font-serif text-[#F3EFE0]">Síguenos in Instagram</h3>
             <p className="text-xs sm:text-sm text-zinc-400 font-light">
               Descubre contenido exclusivo y actualizaciones diarias de nuestro staff.
             </p>
@@ -631,7 +639,7 @@ export default function TantraProvidencia() {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] hover:brightness-110 text-white font-medium px-6 py-3.5 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 text-xs uppercase tracking-widest"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] hover:brightness-110 text-white font-medium px-6 py-3.5 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-195 text-xs uppercase tracking-widest"
           >
             <InstagramIcon className="w-4 h-4" />
             <span>Ver @massage_fernanda</span>
